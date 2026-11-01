@@ -1,0 +1,26 @@
+/newcommunication2.0/
+/.vscode/
+
+# ROS / Colcon generated output
+**/build/
+**/build-fusion/
+**/install/
+**/devel/
+**/log/
+**/logs/
+
+# Local runtime data and caches
+**/.cache/
+**/__pycache__/
+**/records/
+*.pyc
+*.bag
+*.db3
+*.mcap
+*.avi
+
+# Local Groot2 runtime files
+**/Groot2*.AppImage
+**/squashfs-root/
+**/sysroot/
+**/debs/

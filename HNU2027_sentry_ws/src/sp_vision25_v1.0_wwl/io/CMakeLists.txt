@@ -1,0 +1,84 @@
+cmake_minimum_required(VERSION 3.16)
+
+find_package(yaml-cpp REQUIRED)
+
+add_subdirectory(serial)
+
+# 创建目标 io
+add_library(io STATIC 
+    hikrobot/hikrobot.cpp    
+    mindvision/mindvision.cpp  
+    usbcamera/usbcamera.cpp  
+    camera.cpp
+    cboard.cpp
+    dm_imu/dm_imu.cpp
+    gimbal/gimbal.cpp
+    nav_serial_gimbal.cpp
+)
+
+# hikrobot
+target_include_directories(io PUBLIC hikrobot/include)
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
+  target_link_directories(io PUBLIC hikrobot/lib/amd64)
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+  target_link_directories(io PUBLIC hikrobot/lib/arm64)
+else()
+  message(FATAL_ERROR "Unsupported architecture: ${CMAKE_HOST_SYSTEM_PROCESSOR}!")
+endif()
+
+# mindvision
+target_include_directories(io PUBLIC mindvision/include)
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
+  target_link_directories(io PUBLIC mindvision/lib/amd64)
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+  target_link_directories(io PUBLIC mindvision/lib/arm64)
+else()
+  message(FATAL_ERROR "Unsupported architecture: ${CMAKE_HOST_SYSTEM_PROCESSOR}!")
+endif()
+
+target_link_libraries(io MvCameraControl MVSDK usb-1.0 yaml-cpp serial)
+
+################## 检查 ROS 环境 ##################
+if(NOT SP_VISION_DISABLE_ROS2)
+  find_package(ament_cmake QUIET)
+  find_package(rclcpp QUIET)
+  find_package(std_msgs QUIET)
+  find_package(rosidl_typesupport_cpp QUIET)
+  find_package(sp_msgs QUIET)
+  find_package(sensor_msgs QUIET)
+  find_package(pb_rm_interfaces QUIET)
+  find_package(example_interfaces QUIET)
+endif()
+
+if(SP_VISION_BUILD_ROS_GIMBAL)
+
+# 如果找不到 ROS 环境，则跳过 ROS 相关的部分
+if(NOT ament_cmake_FOUND OR NOT rclcpp_FOUND OR NOT std_msgs_FOUND OR NOT rosidl_typesupport_cpp_FOUND OR NOT sp_msgs_FOUND)
+    message(WARNING "ROS2 not found, skipping ROS2 specific code.")
+else()
+    message(STATUS "ROS2 environment found, compiling ROS2-related code.")
+    
+    # 添加 ROS2 相关的文件
+    target_sources(io PRIVATE ros2/publish2nav.cpp ros2/ros2.cpp ros2/subscribe2nav.cpp)
+
+    # 设置 ROS2 依赖
+    include_directories(${std_msgs_INCLUDE_DIRS})
+    ament_target_dependencies(io rclcpp std_msgs sp_msgs)
+endif()
+endif()
+
+
+# The navigation-owned serial bridge used by the ROS2 self-aim entry point.
+# This is only needed by the legacy standard_mpc_ros2 adapter. The current
+# standard_mpc_serial_nav_bridge does not need RosGimbal, so it is disabled by
+# default to avoid propagating fastcdr/ament targets into the shared io library.
+if(SP_VISION_BUILD_ROS_GIMBAL AND
+  NOT SP_VISION_DISABLE_ROS2 AND ament_cmake_FOUND AND rclcpp_FOUND AND sensor_msgs_FOUND AND
+  pb_rm_interfaces_FOUND AND example_interfaces_FOUND)
+  target_sources(io PRIVATE ros_gimbal.cpp)
+  ament_target_dependencies(io rclcpp sensor_msgs pb_rm_interfaces example_interfaces)
+  target_compile_definitions(io PUBLIC SP_VISION_HAS_ROS2_GIMBAL=1)
+  message(STATUS "ROS2 gimbal bridge enabled")
+else()
+  message(STATUS "ROS2 gimbal bridge disabled (not required by current nav bridge)")
+endif()

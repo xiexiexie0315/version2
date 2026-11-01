@@ -1,0 +1,179 @@
+# enemy_color: "red"
+enemy_color: "blue"
+
+#####-----神经网络参数-----#####
+yolo_name: yolov5
+classify_model: assets/tiny_resnet.onnx
+yolo11_model_path: assets/yolo11.xml
+yolov8_model_path: assets/yolov8.xml
+yolov5_model_path: assets/yolov5.xml
+device: CPU
+min_confidence: 0.8
+use_traditional: true
+
+#####-----ROI-----#####
+roi: 
+  x: 420
+  y: 50
+  width: 600
+  height: 600
+
+use_roi: false
+
+#####-----传统方法参数-----#####
+threshold: 150
+max_angle_error: 45 # degree
+min_lightbar_ratio: 1.5
+max_lightbar_ratio: 20
+min_lightbar_length: 8
+min_armor_ratio: 1
+max_armor_ratio: 5
+max_side_ratio: 1.5
+max_rectangular_error: 25 # degree
+
+#####-----tracker参数-----#####
+min_detect_count: 5
+max_temp_lost_count: 15
+outpost_max_temp_lost_count: 75
+
+#####-----aimer参数-----#####
+yaw_offset: 2 # degree -2.5
+pitch_offset: 13 # degree 2
+comming_angle: 55 # degree
+leaving_angle: 20 # degree
+decision_speed: 7 # rad/s
+high_speed_delay_time: 0.0 # s
+low_speed_delay_time: 0.0 # s planner use this value
+
+#####-----shooter参数-----#####
+first_tolerance: 3 # 近距离射击容差，degree
+second_tolerance: 2 # 远距离射击容差，degree
+judge_distance: 2 #距离判断阈值
+auto_fire: true # 是否由自瞄控制射击
+
+camera_name: "hikrobot"
+exposure_ms: 30
+gain: 20
+vid_pid: "2bdf:0001"
+
+#####-----omni search side USB cameras-----#####
+# This only affects standard_mpc_serial_omni_search. The original
+# standard_mpc_serial target ignores these keys.
+omni_search_enabled: true
+omni_search_timeout_ms: 1200
+omni_search_hold_ms: 3000
+omni_search_fov_h_deg: 60
+omni_search_fov_v_deg: 45
+omni_search_yaw_limit_deg: 90
+omni_search_pitch_limit_deg: 20
+omni_search_show_usb: true
+omni_search_cameras:
+  # One right-side USB camera. If /dev/video0 cannot be opened, change this
+  # to the working node found by: v4l2-ctl --list-devices
+  - {name: "right", device: "video0", yaw_center_deg: -60}
+
+# Parameters used by io::USBCamera for the side cameras.
+# Treat these as safe starting values; adjust on the car after confirming the
+# actual /dev/videoX mapping.
+image_width: 640
+image_height: 480
+usb_exposure: 80
+usb_frame_rate: 30
+usb_gamma: 100
+usb_gain: 20
+
+#  1  0  0
+#  0  1  0
+#  0  0  1
+R_gimbal2imubody: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+
+# 重投影误差: 0.1820px
+camera_matrix: [1785.4881526822305, 0, 672.4806478241826, 0, 1785.026019470562, 559.89603224794314, 0, 0, 1]
+distort_coeffs: [-0.076005079619881746, 0.11182817466388446, 0.0005362204787722057, -0.0027546300984895122, 0]
+
+# 相机同理想情况的偏角: yaw1.44 pitch-7.28 roll0.96 degree
+# 标定板到世界坐标系原点的水平距离: 1.13 m
+# 标定板同竖直摆放时的偏角: yaw7.61 pitch13.92 roll-0.46 degree
+R_camera2gimbal: [-0.027182119030230909, -0.12616154330853446, 0.99163723074269183, -0.99949106557517331, 0.019998323121329122, -0.024853106601381177, -0.016695575474690555, -0.99180811252093692, -0.12664093215554434]
+t_camera2gimbal: [0.13160669975045827, 0.10377721766577375, 0.024908271912914642]
+
+#####-----cboard参数-----#####
+quaternion_canid: 0x100
+bullet_speed_canid: 0x101
+send_canid: 0xff
+can_interface: "can0"
+
+#####-----gimbal参数-----#####
+com_port: "/dev/gimbal"
+yaw_kp: 0
+yaw_kd: 0
+pitch_kp: 0
+pitch_kd: 0
+
+# ROS2 navigation bridge. The checked lower-controller gimbal loop uses
+# degrees internally while the ROS message contract is radians. Keep these
+# compensation factors at 57.2957795 until the lower controller converts the
+# received command to degrees itself; then set both values to 1.0.
+ros2_gimbal_yaw_scale: 57.2957795
+ros2_gimbal_pitch_scale: 57.2957795
+# Used by the MPC ballistic lead until the lower controller publishes a live
+# muzzle-speed topic. Set this to the measured speed for the installed gun.
+ros2_gimbal_bullet_speed: 22.0
+# Optional Float64 topic. The navigation serial node exposes an ID_DEBUG item
+# named "bullet_spd" here when its debug parameter is enabled. The protocol
+# limits debug names to 10 bytes, so do not use the longer "bullet_speed".
+ros2_gimbal_bullet_speed_topic: "serial/debug/bullet_spd"
+ros2_gimbal_imu_timeout_ms: 500
+
+# Standalone C++ serial entry (standard_mpc_serial). The frame layout and CRC
+# match standard_robot_pp_ros2. Byte stuffing matches newcommunication2.0.
+nav_serial_port: "/dev/ttyACM0"
+nav_serial_baud: 115200
+# Planner output is radians. The checked SBUS + WHEEL_OMNI_INFANTRY firmware
+# copies these values directly into a degree-based gimbal loop, so convert here.
+# If firmware later converts pitch and converts+negates yaw on receive, set both to 1.0.
+# MCU uplink yaw is (offset - INS), while its PID target uses (INS - offset),
+# so yaw also needs a sign inversion. Pitch uses the same sign on both paths.
+nav_serial_yaw_scale: -57.2957795
+nav_serial_pitch_scale: 57.2957795
+# MCU refreshes yaw_offset in GYRO and freezes it on entering AUTO, so its IMU
+# yaw already has the correct relative origin. Do not subtract the first frame.
+nav_serial_yaw_relative_to_start: false
+nav_serial_bullet_speed: 22.0
+nav_serial_imu_timeout_ms: 500
+# If the camera/detector stops updating, invalidate the last target promptly.
+nav_serial_target_timeout_ms: 200
+# Independent TX-layer watchdog. It also clears a command if Planner stalls.
+nav_serial_command_timeout_ms: 200
+# Version1 ROS2 bridge watchdog. If navigation stops publishing cmd_vel, chassis speed is zeroed.
+nav_serial_chassis_command_timeout_ms: 250
+# Values outside the Nav2 limits are clamped and reported instead of being sent unchecked.
+nav_serial_chassis_max_vx: 2.5
+nav_serial_chassis_max_vy: 2.5
+nav_serial_chassis_max_wz: 3.0
+nav_serial_reconnect_ms: 1000
+# newcommunication2.0 escapes 0x5A/0x5B after CRC calculation.
+nav_serial_byte_stuffing: true
+# Keep false for normal self-aim. Set true only for a short downlink test:
+# the gimbal receives tracking=1, yaw=0.05 rad (about 2.86 deg), pitch=0.
+nav_serial_manual_test: false
+nav_serial_manual_test_yaw: 0.05
+nav_serial_manual_test_pitch: 0.0
+
+#####-----planner-----#####
+fire_thresh: 0.0035
+
+max_yaw_acc: 50
+Q_yaw: [9e6, 0]
+R_yaw: [1]
+
+max_pitch_acc: 100
+Q_pitch: [9e6, 0]
+R_pitch: [1]
+
+#####-----buff_detector参数-----#####
+model: "assets/yolo11_buff_int8.xml"
+
+#####-----buff_aimer参数-----#####
+fire_gap_time: 0.700   # s
+predict_time: 0.120     # s
