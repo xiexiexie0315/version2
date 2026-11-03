@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 find_package(yaml-cpp REQUIRED)
 
-add_subdirectory(serial)
 
 # 创建目标 io
 add_library(io STATIC 
@@ -13,7 +12,6 @@ add_library(io STATIC
     cboard.cpp
     dm_imu/dm_imu.cpp
     gimbal/gimbal.cpp
-    nav_serial_gimbal.cpp
 )
 
 # hikrobot
@@ -36,7 +34,7 @@ else()
   message(FATAL_ERROR "Unsupported architecture: ${CMAKE_HOST_SYSTEM_PROCESSOR}!")
 endif()
 
-target_link_libraries(io MvCameraControl MVSDK usb-1.0 yaml-cpp serial)
+target_link_libraries(io MvCameraControl MVSDK usb-1.0 yaml-cpp)
 
 ################## 检查 ROS 环境 ##################
 if(NOT SP_VISION_DISABLE_ROS2)
@@ -68,10 +66,8 @@ endif()
 endif()
 
 
-# The navigation-owned serial bridge used by the ROS2 self-aim entry point.
-# This is only needed by the legacy standard_mpc_ros2 adapter. The current
-# standard_mpc_serial_nav_bridge does not need RosGimbal, so it is disabled by
-# default to avoid propagating fastcdr/ament targets into the shared io library.
+# ROS 2 adapter used by the decoupled self-aim entry point.  The physical serial
+# device remains exclusively owned by standard_robot_pp_ros2.
 if(SP_VISION_BUILD_ROS_GIMBAL AND
   NOT SP_VISION_DISABLE_ROS2 AND ament_cmake_FOUND AND rclcpp_FOUND AND sensor_msgs_FOUND AND
   pb_rm_interfaces_FOUND AND example_interfaces_FOUND)
@@ -80,5 +76,5 @@ if(SP_VISION_BUILD_ROS_GIMBAL AND
   target_compile_definitions(io PUBLIC SP_VISION_HAS_ROS2_GIMBAL=1)
   message(STATUS "ROS2 gimbal bridge enabled")
 else()
-  message(STATUS "ROS2 gimbal bridge disabled (not required by current nav bridge)")
+  message(STATUS "ROS2 gimbal bridge disabled (ROS2 dependencies unavailable)")
 endif()

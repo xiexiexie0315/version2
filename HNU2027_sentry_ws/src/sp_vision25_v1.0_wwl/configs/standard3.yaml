@@ -125,41 +125,6 @@ ros2_gimbal_bullet_speed: 22.0
 ros2_gimbal_bullet_speed_topic: "serial/debug/bullet_spd"
 ros2_gimbal_imu_timeout_ms: 500
 
-# Standalone C++ serial entry (standard_mpc_serial). The frame layout and CRC
-# match standard_robot_pp_ros2. Byte stuffing matches newcommunication2.0.
-nav_serial_port: "/dev/ttyACM0"
-nav_serial_baud: 115200
-# Planner output is radians. The checked SBUS + WHEEL_OMNI_INFANTRY firmware
-# copies these values directly into a degree-based gimbal loop, so convert here.
-# If firmware later converts pitch and converts+negates yaw on receive, set both to 1.0.
-# MCU uplink yaw is (offset - INS), while its PID target uses (INS - offset),
-# so yaw also needs a sign inversion. Pitch uses the same sign on both paths.
-nav_serial_yaw_scale: -57.2957795
-nav_serial_pitch_scale: 57.2957795
-# MCU refreshes yaw_offset in GYRO and freezes it on entering AUTO, so its IMU
-# yaw already has the correct relative origin. Do not subtract the first frame.
-nav_serial_yaw_relative_to_start: false
-nav_serial_bullet_speed: 22.0
-nav_serial_imu_timeout_ms: 500
-# If the camera/detector stops updating, invalidate the last target promptly.
-nav_serial_target_timeout_ms: 200
-# Independent TX-layer watchdog. It also clears a command if Planner stalls.
-nav_serial_command_timeout_ms: 200
-# Version1 ROS2 bridge watchdog. If navigation stops publishing cmd_vel, chassis speed is zeroed.
-nav_serial_chassis_command_timeout_ms: 250
-# Values outside the Nav2 limits are clamped and reported instead of being sent unchecked.
-nav_serial_chassis_max_vx: 2.5
-nav_serial_chassis_max_vy: 2.5
-nav_serial_chassis_max_wz: 3.0
-nav_serial_reconnect_ms: 1000
-# newcommunication2.0 escapes 0x5A/0x5B after CRC calculation.
-nav_serial_byte_stuffing: true
-# Keep false for normal self-aim. Set true only for a short downlink test:
-# the gimbal receives tracking=1, yaw=0.05 rad (about 2.86 deg), pitch=0.
-nav_serial_manual_test: false
-nav_serial_manual_test_yaw: 0.05
-nav_serial_manual_test_pitch: 0.0
-
 #####-----planner-----#####
 fire_thresh: 0.0035
 

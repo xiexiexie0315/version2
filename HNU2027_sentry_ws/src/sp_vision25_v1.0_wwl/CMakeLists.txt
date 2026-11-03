@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16.3)
 project(sp_vision)
 
 option(SP_VISION_DISABLE_ROS2 "Build without any ROS2 integration" OFF)
-option(SP_VISION_BUILD_ROS_GIMBAL "Build legacy ROS2 gimbal adapter (standard_mpc_ros2)" OFF)
+option(SP_VISION_BUILD_ROS_GIMBAL "Build ROS2-decoupled self-aim entry (standard_mpc_ros2)" ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Release)
@@ -79,7 +79,6 @@ add_executable(usbcamera_test tests/usbcamera_test.cpp)
 add_executable(handeye_test tests/handeye_test.cpp)
 add_executable(dm_test tests/dm_test.cpp)
 add_executable(minimum_vision_system tests/minimum_vision_system.cpp)
-add_executable(nav_serial_wire_test tests/nav_serial_wire_test.cpp tools/crc.cpp)
 
 target_link_libraries(auto_aim_test ${OpenCV_LIBS} fmt::fmt yaml-cpp tools io auto_aim)
 target_link_libraries(auto_buff_test ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_buff tools io)
@@ -105,19 +104,6 @@ target_link_libraries(planner_test ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_aim too
 
 add_executable(planner_test_offline tests/planner_test_offline.cpp)
 target_link_libraries(planner_test_offline ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_aim tools io)
-
-# Standalone phase-one entry point. It speaks the proven navigation serial
-# protocol directly and has no ROS2 dependency. Do not run it together with
-# standard_robot_pp_ros2 because both would own the same serial device.
-add_executable(standard_mpc_serial src/standard_mpc_serial.cpp)
-target_link_libraries(
-  standard_mpc_serial
-  ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_aim tools io)
-
-add_executable(standard_mpc_serial_omni_search src/standard_mpc_serial_omni_search.cpp)
-target_link_libraries(
-  standard_mpc_serial_omni_search
-  ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_aim tools io)
 
 # 检查 ROS 环境
 if(NOT SP_VISION_DISABLE_ROS2)
@@ -173,18 +159,3 @@ else()
   message(STATUS "Skipping standard_mpc_ros2 (navigation ROS2 interfaces not found)")
 endif()
 
-# Version1: self-aim owns the real serial port and bridges navigation cmd_vel
-# into the same downlink frame used for gimbal commands.
-if(
-  NOT SP_VISION_DISABLE_ROS2 AND ament_cmake_FOUND AND rclcpp_FOUND AND sensor_msgs_FOUND AND
-  geometry_msgs_FOUND)
-  add_executable(standard_mpc_serial_nav_bridge src/standard_mpc_serial_nav_bridge.cpp)
-  target_link_libraries(
-    standard_mpc_serial_nav_bridge
-    ${OpenCV_LIBS} fmt::fmt yaml-cpp auto_aim tools io)
-  ament_target_dependencies(
-    standard_mpc_serial_nav_bridge rclcpp sensor_msgs geometry_msgs)
-  message(STATUS "Building standard_mpc_serial_nav_bridge for version2")
-else()
-  message(STATUS "Skipping standard_mpc_serial_nav_bridge (ROS2 geometry/sensor interfaces not found)")
-endif()
