@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="rmul_2027_3v3">
+    <static>true</static>
+    <link name="field">
+      <visual name="field_visual">
+        <geometry>
+          <mesh><uri>model://rmul_2027_3v3/meshes/field_visual.stl</uri></mesh>
+        </geometry>
+      </visual>
+      <collision name="field_collision">
+        <geometry>
+          <mesh><uri>model://rmul_2027_3v3/meshes/field_collision.stl</uri></mesh>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- These roofs deliberately remain out of the 2D occupancy map.  They
+         are 3D visible and collidable geometry so lidar and physics agree. -->
+    <link name="blue_spawn_tunnel_roof">
+      <pose>-2.50 3.50 0.36 0 0 0</pose>
+      <visual name="visual">
+        <geometry><box><size>0.30 0.80 0.02</size></box></geometry>
+        <material><diffuse>0.10 0.25 0.95 0.55</diffuse></material>
+      </visual>
+      <collision name="collision">
+        <geometry><box><size>0.30 0.80 0.02</size></box></geometry>
+      </collision>
+    </link>
+    <link name="red_spawn_tunnel_roof">
+      <pose>2.50 -3.50 0.36 0 0 0</pose>
+      <visual name="visual">
+        <geometry><box><size>0.30 0.80 0.02</size></box></geometry>
+        <material><diffuse>0.95 0.10 0.10 0.55</diffuse></material>
+      </visual>
+      <collision name="collision">
+        <geometry><box><size>0.30 0.80 0.02</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

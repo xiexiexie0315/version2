@@ -1,0 +1,3 @@
+world: rmul_2027_3v3
+world_frame: map
+coordinate_contract: world_origin_equals_map_origin
