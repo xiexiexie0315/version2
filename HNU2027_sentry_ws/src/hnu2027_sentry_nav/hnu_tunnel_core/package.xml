@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu_tunnel_core</name>
-  <version>0.1.0</version>
-  <description>ROS-independent tunnel safety and route-selection algorithms.</description>
+  <version>0.2.0</version>
+  <description>ROS-independent safety gate and deterministic tunnel traversal state machine.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
 </package>
