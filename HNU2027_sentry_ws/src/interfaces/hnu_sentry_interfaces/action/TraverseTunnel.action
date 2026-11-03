@@ -1,0 +1,16 @@
+# Request one complete tunnel traversal. The caller selects only the known
+# tunnel and direction; perception, folding and motion remain implementation
+# details of the tunnel execution stack.
+string tunnel_id
+uint8 DIRECTION_ENTRY_TO_EXIT=0
+uint8 DIRECTION_EXIT_TO_ENTRY=1
+uint8 direction
+---
+# Terminal result.
+bool success
+string terminal_phase
+string reason
+---
+# Progress feedback for the strategic decision layer and diagnostics.
+string phase
+string detail

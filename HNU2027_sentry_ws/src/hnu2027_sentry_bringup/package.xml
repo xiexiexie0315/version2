@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>hnu2027_sentry_bringup</name>
+  <version>0.1.0</version>
+  <description>Top-level launch entry points for HNU 2027 sentry.</description>
+  <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
+  <license>Proprietary</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>launch</exec_depend>
+</package>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>hnu_tunnel_perception</name>
+  <version>0.1.0</version>
+  <description>Point-cloud tunnel observation for HNU 2027 sentry.</description>
+  <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
+  <license>Proprietary</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+</package>
