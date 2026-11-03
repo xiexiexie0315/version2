@@ -1,0 +1,15 @@
+/**:
+  ros__parameters:
+    # The parent launch sets one tunnel-specific prior for each detector node.
+    input_cloud_topic: registered_scan
+    observation_topic: tunnel/observation
+    map_frame: map
+    accumulation_seconds: 1.0
+    max_input_age_seconds: 0.5
+    minimum_samples: 40
+    minimum_roof_points: 12
+    minimum_wall_points: 6
+    roof_min_above_floor_m: 0.12
+    wall_band_m: 0.12
+    obstacle_min_height_m: 0.08
+    roof_exclusion_m: 0.02

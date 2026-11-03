@@ -1,9 +1,28 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu_tunnel_perception</name>
-  <version>0.1.0</version>
-  <description>Point-cloud tunnel observation for HNU 2027 sentry.</description>
+  <version>0.2.0</version>
+  <description>Read-only registered-point-cloud tunnel observation for HNU sentry.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>hnu_sentry_interfaces</build_depend>
+  <build_depend>pcl_conversions</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>tf2_sensor_msgs</build_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>hnu_sentry_interfaces</exec_depend>
+  <exec_depend>pcl_conversions</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>tf2_sensor_msgs</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
 </package>
