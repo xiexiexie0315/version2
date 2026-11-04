@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu_tunnel_controller</name>
-  <version>0.2.0</version>
-  <description>Fail-closed fold execution core and adapters for tunnel traversal.</description>
+  <version>0.3.0</version>
+  <description>Fail-closed tunnel control arbitration, clearance filtering, traversal motion, and fold execution.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>hnu_tunnel_core</build_depend>
+  <exec_depend>hnu_tunnel_core</exec_depend>
   <test_depend>ament_cmake_gtest</test_depend>
 </package>
