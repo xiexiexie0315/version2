@@ -10,7 +10,7 @@
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "hnu_sentry_interfaces/msg/tunnel_observation.hpp"
 #include "hnu_tunnel_perception/tunnel_geometry_detector.hpp"
-#include "pcl_conversions/pcl_conversions.hpp"
+#include "pcl_conversions/pcl_conversions.h"
 #include "pcl/point_cloud.h"
 #include "pcl/point_types.h"
 #include "rclcpp/rclcpp.hpp"
