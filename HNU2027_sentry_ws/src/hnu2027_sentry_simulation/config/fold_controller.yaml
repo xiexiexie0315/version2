@@ -1,0 +1,6 @@
+# Gazebo native command topic. A ROS bridge/adapter may be added after the target ROS-Gazebo bridge is confirmed.
+model_name: hnu2027_sentry_proxy
+joint_name: fold_joint
+command_topic: /model/hnu2027_sentry_proxy/joint/fold_joint/0/cmd_pos
+folded_position: -0.16
+unfolded_position: 0.0

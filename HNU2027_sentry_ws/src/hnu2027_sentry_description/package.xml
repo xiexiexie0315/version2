@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu2027_sentry_description</name>
-  <version>0.1.0</version>
-  <description>HNU 2027 sentry robot description and collision assets.</description>
+  <version>0.2.0</version>
+  <description>Parameterized 2027 sentry proxy description. Visual and collision meshes may be replaced without changing link or joint names.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>

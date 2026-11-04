@@ -1,0 +1,15 @@
+# Proxy values only. Replace with measured extrema after the SolidWorks model is imported.
+frames:
+  base: base_link
+  upper: upper_link
+  lidar: lidar_link
+  imu: imu_link
+joints:
+  fold: fold_joint
+envelope:
+  unfolded:
+    height_m: 0.40
+    width_m: 0.32
+  folded:
+    height_m: 0.24
+    width_m: 0.32

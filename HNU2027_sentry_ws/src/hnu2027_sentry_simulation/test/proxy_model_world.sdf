@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="proxy_model_test">
+    <gravity>0 0 -9.8</gravity>
+    <physics name="1ms" type="ignored"><max_step_size>0.001</max_step_size><real_time_factor>1.0</real_time_factor></physics>
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics"/>
+    <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands"/>
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster"/>
+    <include><uri>model://hnu2027_sentry_proxy</uri></include>
+  </world>
+</sdf>

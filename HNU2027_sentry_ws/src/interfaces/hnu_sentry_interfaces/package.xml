@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu_sentry_interfaces</name>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <description>Stable ROS 2 interfaces for HNU sentry extensions.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
