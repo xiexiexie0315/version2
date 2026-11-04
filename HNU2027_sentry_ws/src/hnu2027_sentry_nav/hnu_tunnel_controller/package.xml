@@ -9,4 +9,7 @@
   <build_depend>hnu_tunnel_core</build_depend>
   <exec_depend>hnu_tunnel_core</exec_depend>
   <test_depend>ament_cmake_gtest</test_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

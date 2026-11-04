@@ -6,4 +6,7 @@
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>
