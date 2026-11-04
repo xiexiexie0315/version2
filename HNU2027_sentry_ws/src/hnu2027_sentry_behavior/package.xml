@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu2027_sentry_behavior</name>
-  <version>0.1.0</version>
-  <description>Competition strategy extensions for HNU 2027 sentry.</description>
+  <version>0.2.0</version>
+  <description>HNU 2027 behavior-tree bridge for safely invoking tunnel traversal.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>behaviortree_ros2</build_depend>
+  <build_depend>hnu_sentry_interfaces</build_depend>
+  <build_depend>rclcpp_action</build_depend>
+  <exec_depend>behaviortree_ros2</exec_depend>
+  <exec_depend>hnu_sentry_interfaces</exec_depend>
+  <exec_depend>rclcpp_action</exec_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
 </package>

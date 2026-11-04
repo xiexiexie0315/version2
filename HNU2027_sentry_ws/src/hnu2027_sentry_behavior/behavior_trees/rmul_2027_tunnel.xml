@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This subtree is invoked only after the competition decision layer has chosen
+  a tunnel attempt. Failure intentionally propagates to the caller, which must
+  choose a normal-route fallback. No game-strategy policy is encoded here.
+-->
+<root BTCPP_format="4" main_tree_to_execute="TraverseTunnelTask">
+  <BehaviorTree ID="TraverseTunnelTask">
+    <TraverseTunnel server_name="traverse_tunnel"
+                    tunnel_id="{tunnel_id}"
+                    direction="{tunnel_direction}"
+                    terminal_phase="{tunnel_terminal_phase}"
+                    reason="{tunnel_reason}"
+                    current_phase="{tunnel_current_phase}"/>
+  </BehaviorTree>
+</root>

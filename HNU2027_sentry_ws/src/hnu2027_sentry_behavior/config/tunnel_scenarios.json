@@ -1,0 +1,9 @@
+[
+  {"scenario":"normal_through","action_succeeded":true,"terminal_phase":"complete","reason":"complete","zero_velocity_observed":true,"expected_success":true},
+  {"scenario":"perception_failure","action_succeeded":false,"terminal_phase":"fallback","reason":"detect_timeout_or_unsafe","zero_velocity_observed":true,"expected_success":false},
+  {"scenario":"fold_failure","action_succeeded":false,"terminal_phase":"abort","reason":"fold_fault","zero_velocity_observed":true,"expected_success":false},
+  {"scenario":"obstacle_in_tunnel","action_succeeded":false,"terminal_phase":"abort","reason":"unsafe_during_traverse","zero_velocity_observed":true,"expected_success":false},
+  {"scenario":"localization_drift","action_succeeded":false,"terminal_phase":"abort","reason":"observation_stale","zero_velocity_observed":true,"expected_success":false},
+  {"scenario":"traverse_timeout","action_succeeded":false,"terminal_phase":"abort","reason":"traverse_timeout","zero_velocity_observed":true,"expected_success":false},
+  {"scenario":"task_cancelled","action_succeeded":false,"terminal_phase":"abort","reason":"cancel_requested","zero_velocity_observed":true,"expected_success":false}
+]
