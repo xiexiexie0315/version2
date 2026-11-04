@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>hnu2027_sentry_bringup</name>
-  <version>0.1.0</version>
-  <description>Top-level launch entry points for HNU 2027 sentry.</description>
+  <version>0.2.0</version>
+  <description>Fail-closed launch and field-validation tooling for HNU 2027 sentry.</description>
   <maintainer email="sentry@example.invalid">HNU sentry team</maintainer>
   <license>Proprietary</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
   <exec_depend>launch</exec_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
 </package>

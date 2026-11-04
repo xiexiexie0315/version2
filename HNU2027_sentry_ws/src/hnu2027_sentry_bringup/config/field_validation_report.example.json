@@ -1,0 +1,13 @@
+{
+  "report_version": 1,
+  "deployment_mode": "manual_permit",
+  "field_geometry": {"minimum_width_m": 0.0, "minimum_clearance_m": 0.0, "map_alignment_error_m": 0.0},
+  "robot_envelope": {"folded_width_m": 0.0, "folded_height_m": 0.0, "safety_margin_m": 0.0},
+  "fold_execution": {"max_fold_time_s": 0.0, "fault_count": 0},
+  "braking": {"test_speed_mps": 0.0, "max_stop_distance_m": 0.0},
+  "lidar_extrinsic": {"translation_error_m": 0.0, "rotation_error_deg": 0.0},
+  "trials": {"total": 0, "complete": 0, "safe_failures": 0},
+  "autonomous_validation_approved": false,
+  "reviewer": "",
+  "rosbag_paths": []
+}

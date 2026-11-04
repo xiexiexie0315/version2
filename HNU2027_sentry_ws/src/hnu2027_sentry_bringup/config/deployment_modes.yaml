@@ -1,0 +1,20 @@
+# Default real-robot deployment posture. Do not change autonomous_validation_approved
+# without a reviewed field-validation report.
+deployment:
+  default_mode: shadow
+  manual_approval_ttl_s: 15.0
+  autonomous_validation_approved: false
+  required_rosbag_topics:
+    - /tunnel/observation
+    - /tunnel/fold_state
+    - /tunnel/traverse/feedback
+    - /cmd_vel
+    - /tf
+    - /tf_static
+field_validation_required:
+  - tunnel_geometry_resurvey
+  - robot_envelope_measurement
+  - fold_timing_and_fault_test
+  - braking_distance_test
+  - lidar_extrinsic_verification
+  - repeated_manual_permit_trials
