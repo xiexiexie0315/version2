@@ -1,0 +1,19 @@
+gazebo_controller_adapter:
+  ros__parameters:
+    model_name: hnu2027_sentry
+    base_frame: base_link
+    command_timeout: 0.3
+    feedback_timeout: 0.3
+    settle_time: 0.2
+    position_tolerance: 0.03
+    joint_speed_tolerance: 0.08
+    stopped_linear: 0.035
+    stopped_angular: 0.04
+    spin_speed: 0.5
+    linear_limit: 0.5
+    angular_limit: 0.8
+    linear_acceleration: 0.5
+    angular_acceleration: 0.7
+    follow_kp: 1.5
+    action_timeout: 12.0
+    folded_position: 1.5707963267948966

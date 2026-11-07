@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""Explicit test driver: real Gazebo feedback, no forged lower-controller state."""
+import argparse
+import os
+import json
+import time
+from pathlib import Path
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import qos_profile_sensor_data
+from geometry_msgs.msg import Twist, TwistStamped
+from sensor_msgs.msg import JointState
+from nav_msgs.msg import Odometry
+from hnu_sentry_interfaces.msg import TraverseControl, LowerControllerState, MotionControlCommand
+
+class Demo(Node):
+    def __init__(self):
+        super().__init__("coordinator_gazebo_demo")
+        self.req = TraverseControl()
+        self.req.request_id = 100
+        self.nav, self.tunnel = Twist(), TwistStamped()
+        self.auto = False
+        self.state = None
+        self.positions = {}
+        self.pose = None
+        self.last_command = None
+        self.report = []
+        self.req_pub = self.create_publisher(TraverseControl, "/tunnel/control_request", 1)
+        self.nav_pub = self.create_publisher(Twist, "/navigation/cmd_vel", 1)
+        self.tunnel_pub = self.create_publisher(TwistStamped, "/tunnel/cmd_vel", 1)
+        self.target_pub = self.create_publisher(JointState, "/simulation/gimbal_target", 1)
+        self.create_subscription(LowerControllerState, "/robot/controller_state",
+                                 lambda m: setattr(self, "state", m), 1)
+        self.create_subscription(MotionControlCommand, "/robot/control_command",
+                                 lambda m: setattr(self, "last_command", m), 1)
+        self.create_subscription(JointState, "/model/hnu2027_sentry/joint_state",
+            lambda m: setattr(self, "positions", dict(zip(m.name, m.position))),
+            qos_profile_sensor_data)
+        self.create_subscription(Odometry, "/model/hnu2027_sentry/odometry",
+            lambda m: setattr(self, "pose", (m.pose.pose.position.x, m.pose.pose.position.y)),
+            qos_profile_sensor_data)
+        self.create_timer(0.03, self.publish)
+
+    def publish(self):
+        stamp = self.get_clock().now().to_msg()
+        self.req.header.stamp = self.tunnel.header.stamp = stamp
+        self.tunnel.header.frame_id = "base_link"
+        self.req_pub.publish(self.req)
+        self.nav_pub.publish(self.nav)
+        self.tunnel_pub.publish(self.tunnel)
+        if self.auto:
+            msg = JointState()
+            msg.header.stamp, msg.header.frame_id = stamp, "base_link"
+            msg.name = ["big_yaw", "small_yaw", "pitch"]
+            msg.position = [0.3, 0.25, 0.1]
+            self.target_pub.publish(msg)
+
+    def wait(self, predicate, label, timeout=20.0, duration=0.0):
+        deadline = time.monotonic() + timeout
+        since = None
+        while time.monotonic() < deadline:
+            rclpy.spin_once(self, timeout_sec=0.02)
+            if self.state and self.state.fault:
+                raise RuntimeError(label + ": " + self.state.reason)
+            good = self.state and self.state.valid and predicate(self.state)
+            if good:
+                if since is None:
+                    since = time.monotonic()
+                if time.monotonic() - since >= duration:
+                    row = {"case": label, "passed": True, "request_id": self.req.request_id,
+                           "phase": self.req.phase, "joint_positions": dict(self.positions),
+                           "actual_velocity": [self.state.velocity.linear.x,
+                               self.state.velocity.linear.y, self.state.velocity.angular.z],
+                           "actual_mode": self.state.chassis_mode, "pose": self.pose}
+                    self.report.append(row)
+                    print(json.dumps(row), flush=True)
+                    return
+            else:
+                since = None
+        reason = self.last_command.reason if self.last_command else "no coordinator output"
+        state = self.state.reason if self.state else "no adapter state"
+        raise TimeoutError(label + ": " + reason + "; " + state + "; " + str(self.positions))
+
+    def phase(self, phase, vx=0.0, vy=0.0, wz=0.0):
+        self.req.request_id += 1
+        self.req.phase = phase
+        self.tunnel.twist.linear.x, self.tunnel.twist.linear.y = vx, vy
+        self.tunnel.twist.angular.z = wz
+
+    def run(self):
+        self.wait(lambda s: s.unfolded and s.gimbal_ready, "measured_initial_state")
+        self.auto = True
+        self.wait(lambda s: abs(s.velocity.angular.z) > 0.25 and
+                  abs(self.positions.get("small_yaw", 0) - 0.25) < 0.04,
+                  "spin_and_gimbal_target", duration=1.0)
+        self.auto = False
+        self.phase(self.req.DETECT)
+        self.wait(lambda s: s.stopped and s.centered, "stop_and_center")
+        self.phase(self.req.ALIGN, vy=0.04, wz=0.18)
+        self.wait(lambda s: s.chassis_mode == MotionControlCommand.CHASSIS_NAV_DIRECT and
+                  abs(s.velocity.angular.z) > 0.08, "direct_alignment", duration=0.8)
+        self.phase(self.req.FOLD)
+        self.wait(lambda s: s.folded and s.stopped, "measured_fold_complete")
+        self.phase(self.req.VERIFY)
+        self.wait(lambda s: s.folded and s.stopped, "folded_hold", duration=0.4)
+        self.phase(self.req.TRAVERSE, vx=0.12, vy=0.02)
+        initial = self.pose
+        self.wait(lambda s: s.folded and s.velocity.linear.x > 0.07,
+                  "folded_translation", duration=1.5)
+        if initial and self.pose:
+            distance = sum((a-b)**2 for a,b in zip(self.pose, initial))**0.5
+            if distance < 0.08:
+                raise AssertionError("Odometry pose did not move despite traversal request")
+        self.phase(self.req.EXIT)
+        self.wait(lambda s: s.stopped and s.folded, "exit_stop")
+        self.phase(self.req.UNFOLD)
+        self.wait(lambda s: s.unfolded and s.gimbal_ready, "measured_unfold_complete")
+        self.phase(self.req.COMPLETE)
+        self.wait(lambda s: s.chassis_mode == MotionControlCommand.CHASSIS_SPIN and
+                  abs(s.velocity.angular.z) > 0.25, "restore_spin", duration=1.0)
+
+    def stop(self):
+        self.auto = False
+        self.phase(self.req.ABORT)
+        try:
+            self.wait(lambda s: s.stopped, "final_stop", timeout=6.0)
+        except Exception:
+            pass
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", default="/tmp/hnu_stage2_demo_report.json")
+    parser.add_argument("--domain-id", type=int, default=181)
+    args, ros_args = parser.parse_known_args()
+    os.environ["ROS_DOMAIN_ID"] = str(args.domain_id)
+    rclpy.init(args=ros_args)
+    node = Demo()
+    passed, error = False, None
+    try:
+        node.run()
+        passed = True
+    except Exception as exc:
+        error = str(exc)
+        print("FAIL: " + error, flush=True)
+    finally:
+        node.stop()
+        Path(args.report).write_text(json.dumps(
+            {"passed": passed, "error": error, "cases": node.report}, indent=2))
+        node.destroy_node()
+        rclpy.shutdown()
+    if not passed:
+        raise SystemExit(1)
+
+if __name__ == "__main__":
+    main()

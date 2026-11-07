@@ -14,3 +14,11 @@ bool gimbal_ready
 bool fault
 geometry_msgs/Twist velocity
 string reason
+# Execution progress, distinct from the accepted request/mode.
+uint8 EXEC_IDLE=0
+uint8 EXEC_HOLDING=1
+uint8 EXEC_CENTERING=2
+uint8 EXEC_FOLDING=3
+uint8 EXEC_UNFOLDING=4
+uint8 EXEC_FAULT=5
+uint8 execution_state
