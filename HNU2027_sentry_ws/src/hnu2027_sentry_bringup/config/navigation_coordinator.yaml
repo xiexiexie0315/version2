@@ -1,0 +1,15 @@
+navigation_coordinator:
+  ros__parameters:
+    publish_rate_hz: 50.0
+    normal_chassis_mode: spin
+    base_frame: base_link
+    source_timeout_s: 0.25
+    request_timeout_s: 0.5
+    feedback_timeout_s: 0.5
+    nav2_stamped: false
+    nav2_topic: /navigation/cmd_vel
+    tunnel_topic: /tunnel/cmd_vel
+    request_topic: /tunnel/control_request
+    state_topic: /robot/controller_state
+    command_topic: /robot/control_command
+    stop_topic: /robot/emergency_stop

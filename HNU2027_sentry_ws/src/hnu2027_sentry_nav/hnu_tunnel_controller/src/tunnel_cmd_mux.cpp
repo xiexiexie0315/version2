@@ -38,6 +38,12 @@ CmdMuxOutput TunnelCmdMux::select(const CmdMuxInput& input, double now_s) {
   }
 
   const VelocityCommand& requested = desired == CommandSource::kTunnel ? input.tunnel : input.nav2;
+  if (!std::isfinite(requested.linear_x_mps) ||
+      !std::isfinite(requested.linear_y_mps) ||
+      !std::isfinite(requested.angular_z_rps)) {
+    previous_source_ = CommandSource::kNone;
+    return {zero, CommandSource::kNone, "invalid_velocity"};
+  }
   if (!fresh(requested.stamp_s, now_s)) {
     previous_source_ = CommandSource::kNone;
     return {zero, CommandSource::kNone, desired == CommandSource::kTunnel ? "tunnel_command_timeout" : "nav2_command_timeout"};

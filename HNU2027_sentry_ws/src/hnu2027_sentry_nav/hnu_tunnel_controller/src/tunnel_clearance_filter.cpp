@@ -22,11 +22,13 @@ ClearanceFilterOutput TunnelClearanceFilter::filter(const ClearanceFilterInput& 
   if (!input.clearance.safe) return {zero, false, "clearance_unsafe:" + input.clearance.reason};
   if (input.fold_fault) return {zero, false, "fold_fault"};
   if (!input.fold_target || !input.fold_completed) return {zero, false, "fold_not_verified"};
-  if (!std::isfinite(input.requested.linear_x_mps) || !std::isfinite(input.requested.angular_z_rps)) {
+  if (!std::isfinite(input.requested.linear_x_mps) || !std::isfinite(input.requested.angular_z_rps) ||
+      !std::isfinite(input.requested.linear_y_mps)) {
     return {zero, false, "invalid_velocity"};
   }
   VelocityCommand limited = input.requested;
   limited.linear_x_mps = std::clamp(limited.linear_x_mps, -config_.max_linear_mps, config_.max_linear_mps);
+  limited.linear_y_mps = std::clamp(limited.linear_y_mps, -config_.max_linear_mps, config_.max_linear_mps);
   limited.angular_z_rps = std::clamp(limited.angular_z_rps, -config_.max_angular_rps, config_.max_angular_rps);
   return {limited, true, "clearance_verified"};
 }
