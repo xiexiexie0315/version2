@@ -1,0 +1,8 @@
+# Original MJCF model; position targets are radians, not metres.
+model_name: hnu2027_sentry
+fold_joint: fold_roll
+unfolded_position_rad: 0.0
+folded_position_rad: 1.5707963267948966
+command_topic_pattern: /model/hnu2027_sentry/joint/{joint}/cmd_pos
+feedback_topic: /model/hnu2027_sentry/joint_state
+# Native Gazebo controls only; ROS FoldState adapter is a later stage.

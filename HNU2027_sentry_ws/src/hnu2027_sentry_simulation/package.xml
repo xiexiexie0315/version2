@@ -15,4 +15,5 @@
   <export>
     <build_type>ament_cmake</build_type>
   </export>
+  <exec_depend>hnu2027_sentry_description</exec_depend>
 </package>

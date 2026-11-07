@@ -1,0 +1,92 @@
+[
+  {
+    "file": "cad_color_00.stl",
+    "rgb": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "cad_faces": 242,
+    "triangles": 564
+  },
+  {
+    "file": "cad_color_01.stl",
+    "rgb": [
+      0.37626,
+      0.37626,
+      0.37626
+    ],
+    "cad_faces": 6,
+    "triangles": 82
+  },
+  {
+    "file": "cad_color_02.stl",
+    "rgb": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "cad_faces": 3,
+    "triangles": 23
+  },
+  {
+    "file": "cad_color_03.stl",
+    "rgb": [
+      0.74534,
+      0.88788,
+      1.0
+    ],
+    "cad_faces": 78,
+    "triangles": 284
+  },
+  {
+    "file": "cad_color_04.stl",
+    "rgb": [
+      0.0331,
+      0.0331,
+      0.0331
+    ],
+    "cad_faces": 753,
+    "triangles": 2188
+  },
+  {
+    "file": "cad_color_05.stl",
+    "rgb": [
+      0.0,
+      0.00061,
+      1.0
+    ],
+    "cad_faces": 3,
+    "triangles": 23
+  },
+  {
+    "file": "cad_color_06.stl",
+    "rgb": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "cad_faces": 136,
+    "triangles": 352
+  },
+  {
+    "file": "cad_color_07.stl",
+    "rgb": [
+      0.36432,
+      0.59704,
+      0.78741
+    ],
+    "cad_faces": 3,
+    "triangles": 140
+  },
+  {
+    "file": "cad_color_08.stl",
+    "rgb": [
+      0.46,
+      0.52,
+      0.58
+    ],
+    "cad_faces": 50,
+    "triangles": 155
+  }
+]

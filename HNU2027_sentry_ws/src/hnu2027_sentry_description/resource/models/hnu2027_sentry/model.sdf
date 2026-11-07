@@ -1,0 +1,2584 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <model name="hnu2027_sentry">
+    <static>false</static>
+    <self_collide>false</self_collide>
+    <link name="chassis">
+      <pose relative_to="__model__">0 0 0.143 0 -0 0</pose>
+      <inertial>
+        <mass>14.0</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.192383333</ixx>
+          <iyy>0.211516667</iyy>
+          <izz>0.392466667</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="chassis_deck">
+        <pose relative_to="chassis">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.42 0.4 0.07</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="chassis_deck_collision">
+        <pose relative_to="chassis">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.42 0.4 0.07</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="chassis_top">
+        <pose relative_to="chassis">0 0 0.039 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.4 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_front_plate">
+        <pose relative_to="armor_front">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</ambient>
+          <diffuse>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="armor_front_plate_collision">
+        <pose relative_to="armor_front">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="armor_front_light_-1">
+        <pose relative_to="armor_front">0.013 -0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_front_light_1">
+        <pose relative_to="armor_front">0.013 0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_front_top">
+        <pose relative_to="armor_front">0.011 0 0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.06 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_front_stem">
+        <pose relative_to="armor_front">0.011 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.018 0.064</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_front_base">
+        <pose relative_to="armor_front">0.011 0 -0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.074 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_left_plate">
+        <pose relative_to="armor_left">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</ambient>
+          <diffuse>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="armor_left_plate_collision">
+        <pose relative_to="armor_left">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="armor_left_light_-1">
+        <pose relative_to="armor_left">0.013 -0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_left_light_1">
+        <pose relative_to="armor_left">0.013 0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_left_top">
+        <pose relative_to="armor_left">0.011 0 0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.06 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_left_stem">
+        <pose relative_to="armor_left">0.011 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.018 0.064</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_left_base">
+        <pose relative_to="armor_left">0.011 0 -0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.074 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_rear_plate">
+        <pose relative_to="armor_rear">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</ambient>
+          <diffuse>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="armor_rear_plate_collision">
+        <pose relative_to="armor_rear">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="armor_rear_light_-1">
+        <pose relative_to="armor_rear">0.013 -0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_rear_light_1">
+        <pose relative_to="armor_rear">0.013 0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_rear_top">
+        <pose relative_to="armor_rear">0.011 0 0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.06 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_rear_stem">
+        <pose relative_to="armor_rear">0.011 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.018 0.064</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_rear_base">
+        <pose relative_to="armor_rear">0.011 0 -0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.074 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_right_plate">
+        <pose relative_to="armor_right">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</ambient>
+          <diffuse>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="armor_right_plate_collision">
+        <pose relative_to="armor_right">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.19 0.13</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="armor_right_light_-1">
+        <pose relative_to="armor_right">0.013 -0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_right_light_1">
+        <pose relative_to="armor_right">0.013 0.0855 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.012 0.1092</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.05000000074505806 0.699999988079071 1.0 1.0</ambient>
+          <diffuse>0.05000000074505806 0.699999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_right_top">
+        <pose relative_to="armor_right">0.011 0 0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.06 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_right_stem">
+        <pose relative_to="armor_right">0.011 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.018 0.064</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="armor_right_base">
+        <pose relative_to="armor_right">0.011 0 -0.035 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.004 0.074 0.008</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8999999761581421 0.949999988079071 1.0 1.0</ambient>
+          <diffuse>0.8999999761581421 0.949999988079071 1.0 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <link name="wheel_fl">
+      <pose relative_to="chassis">0.17 0.16 -0.045 -1.570796327 0.7853981634 -0.7853981634</pose>
+      <inertial>
+        <mass>0.65</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00175565</ixx>
+          <iyy>0.00175565</iyy>
+          <izz>0.0031213</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="wheel_fl_contact">
+        <pose relative_to="wheel_fl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</ambient>
+          <diffuse>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="wheel_fl_contact_collision">
+        <pose relative_to="wheel_fl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.002</mu>
+              <mu2>0.002</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="wheel_fl_rim">
+        <pose relative_to="wheel_fl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0735</radius>
+            <length>0.0528</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_hub">
+        <pose relative_to="wheel_fl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04214</radius>
+            <length>0.066</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_0">
+        <pose relative_to="wheel_fl">0.08232 0 0 1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_1">
+        <pose relative_to="wheel_fl">0.0712912112 0.04116 0 1.570796327 0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_2">
+        <pose relative_to="wheel_fl">0.04116 0.0712912112 0 1.570796327 1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_3">
+        <pose relative_to="wheel_fl">0 0.08232 0 0 1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_4">
+        <pose relative_to="wheel_fl">-0.04116 0.0712912112 0 -1.570796327 1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_5">
+        <pose relative_to="wheel_fl">-0.0712912112 0.04116 0 -1.570796327 0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_6">
+        <pose relative_to="wheel_fl">-0.08232 0 0 -1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_7">
+        <pose relative_to="wheel_fl">-0.0712912112 -0.04116 0 -1.570796327 -0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_8">
+        <pose relative_to="wheel_fl">-0.04116 -0.0712912112 0 -1.570796327 -1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_9">
+        <pose relative_to="wheel_fl">0 -0.08232 0 0 -1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_10">
+        <pose relative_to="wheel_fl">0.04116 -0.0712912112 0 1.570796327 -1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_roller_11">
+        <pose relative_to="wheel_fl">0.0712912112 -0.04116 0 1.570796327 -0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_0">
+        <pose relative_to="wheel_fl">0.0539 0 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_1">
+        <pose relative_to="wheel_fl">0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_2">
+        <pose relative_to="wheel_fl">-0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_3">
+        <pose relative_to="wheel_fl">-0.0539 6.60084625e-18 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_4">
+        <pose relative_to="wheel_fl">-0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fl_bolt_5">
+        <pose relative_to="wheel_fl">0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="wheel_fl_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>wheel_fl</child>
+      <pose relative_to="wheel_fl">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.03</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_rl">
+      <pose relative_to="chassis">-0.17 0.16 -0.045 -1.570796327 -0.7853981634 0.7853981634</pose>
+      <inertial>
+        <mass>0.65</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00175565</ixx>
+          <iyy>0.00175565</iyy>
+          <izz>0.0031213</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="wheel_rl_contact">
+        <pose relative_to="wheel_rl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</ambient>
+          <diffuse>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="wheel_rl_contact_collision">
+        <pose relative_to="wheel_rl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.002</mu>
+              <mu2>0.002</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="wheel_rl_rim">
+        <pose relative_to="wheel_rl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0735</radius>
+            <length>0.0528</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_hub">
+        <pose relative_to="wheel_rl">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04214</radius>
+            <length>0.066</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_0">
+        <pose relative_to="wheel_rl">0.08232 0 0 1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_1">
+        <pose relative_to="wheel_rl">0.0712912112 0.04116 0 1.570796327 0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_2">
+        <pose relative_to="wheel_rl">0.04116 0.0712912112 0 1.570796327 1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_3">
+        <pose relative_to="wheel_rl">0 0.08232 0 0 1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_4">
+        <pose relative_to="wheel_rl">-0.04116 0.0712912112 0 -1.570796327 1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_5">
+        <pose relative_to="wheel_rl">-0.0712912112 0.04116 0 -1.570796327 0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_6">
+        <pose relative_to="wheel_rl">-0.08232 0 0 -1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_7">
+        <pose relative_to="wheel_rl">-0.0712912112 -0.04116 0 -1.570796327 -0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_8">
+        <pose relative_to="wheel_rl">-0.04116 -0.0712912112 0 -1.570796327 -1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_9">
+        <pose relative_to="wheel_rl">0 -0.08232 0 0 -1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_10">
+        <pose relative_to="wheel_rl">0.04116 -0.0712912112 0 1.570796327 -1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_roller_11">
+        <pose relative_to="wheel_rl">0.0712912112 -0.04116 0 1.570796327 -0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_0">
+        <pose relative_to="wheel_rl">0.0539 0 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_1">
+        <pose relative_to="wheel_rl">0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_2">
+        <pose relative_to="wheel_rl">-0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_3">
+        <pose relative_to="wheel_rl">-0.0539 6.60084625e-18 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_4">
+        <pose relative_to="wheel_rl">-0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rl_bolt_5">
+        <pose relative_to="wheel_rl">0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="wheel_rl_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>wheel_rl</child>
+      <pose relative_to="wheel_rl">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.03</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_rr">
+      <pose relative_to="chassis">-0.17 -0.16 -0.045 1.570796327 -0.7853981634 -0.7853981634</pose>
+      <inertial>
+        <mass>0.65</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00175565</ixx>
+          <iyy>0.00175565</iyy>
+          <izz>0.0031213</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="wheel_rr_contact">
+        <pose relative_to="wheel_rr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</ambient>
+          <diffuse>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="wheel_rr_contact_collision">
+        <pose relative_to="wheel_rr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.002</mu>
+              <mu2>0.002</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="wheel_rr_rim">
+        <pose relative_to="wheel_rr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0735</radius>
+            <length>0.0528</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_hub">
+        <pose relative_to="wheel_rr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04214</radius>
+            <length>0.066</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_0">
+        <pose relative_to="wheel_rr">0.08232 0 0 1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_1">
+        <pose relative_to="wheel_rr">0.0712912112 0.04116 0 1.570796327 0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_2">
+        <pose relative_to="wheel_rr">0.04116 0.0712912112 0 1.570796327 1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_3">
+        <pose relative_to="wheel_rr">0 0.08232 0 0 1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_4">
+        <pose relative_to="wheel_rr">-0.04116 0.0712912112 0 -1.570796327 1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_5">
+        <pose relative_to="wheel_rr">-0.0712912112 0.04116 0 -1.570796327 0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_6">
+        <pose relative_to="wheel_rr">-0.08232 0 0 -1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_7">
+        <pose relative_to="wheel_rr">-0.0712912112 -0.04116 0 -1.570796327 -0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_8">
+        <pose relative_to="wheel_rr">-0.04116 -0.0712912112 0 -1.570796327 -1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_9">
+        <pose relative_to="wheel_rr">0 -0.08232 0 0 -1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_10">
+        <pose relative_to="wheel_rr">0.04116 -0.0712912112 0 1.570796327 -1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_roller_11">
+        <pose relative_to="wheel_rr">0.0712912112 -0.04116 0 1.570796327 -0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_0">
+        <pose relative_to="wheel_rr">0.0539 0 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_1">
+        <pose relative_to="wheel_rr">0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_2">
+        <pose relative_to="wheel_rr">-0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_3">
+        <pose relative_to="wheel_rr">-0.0539 6.60084625e-18 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_4">
+        <pose relative_to="wheel_rr">-0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_rr_bolt_5">
+        <pose relative_to="wheel_rr">0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="wheel_rr_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>wheel_rr</child>
+      <pose relative_to="wheel_rr">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.03</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_fr">
+      <pose relative_to="chassis">0.17 -0.16 -0.045 1.570796327 0.7853981634 0.7853981634</pose>
+      <inertial>
+        <mass>0.65</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00175565</ixx>
+          <iyy>0.00175565</iyy>
+          <izz>0.0031213</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="wheel_fr_contact">
+        <pose relative_to="wheel_fr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</ambient>
+          <diffuse>0.11999999731779099 0.14000000059604645 0.1599999964237213 0.20000000298023224</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="wheel_fr_contact_collision">
+        <pose relative_to="wheel_fr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.098</radius>
+            <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.002</mu>
+              <mu2>0.002</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="wheel_fr_rim">
+        <pose relative_to="wheel_fr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0735</radius>
+            <length>0.0528</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_hub">
+        <pose relative_to="wheel_fr">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04214</radius>
+            <length>0.066</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_0">
+        <pose relative_to="wheel_fr">0.08232 0 0 1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_1">
+        <pose relative_to="wheel_fr">0.0712912112 0.04116 0 1.570796327 0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_2">
+        <pose relative_to="wheel_fr">0.04116 0.0712912112 0 1.570796327 1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_3">
+        <pose relative_to="wheel_fr">0 0.08232 0 0 1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_4">
+        <pose relative_to="wheel_fr">-0.04116 0.0712912112 0 -1.570796327 1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_5">
+        <pose relative_to="wheel_fr">-0.0712912112 0.04116 0 -1.570796327 0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_6">
+        <pose relative_to="wheel_fr">-0.08232 0 0 -1.570796327 0 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_7">
+        <pose relative_to="wheel_fr">-0.0712912112 -0.04116 0 -1.570796327 -0.5235987773 0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_8">
+        <pose relative_to="wheel_fr">-0.04116 -0.0712912112 0 -1.570796327 -1.047197549 1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_9">
+        <pose relative_to="wheel_fr">0 -0.08232 0 0 -1.570796327 0</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.02548</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_10">
+        <pose relative_to="wheel_fr">0.04116 -0.0712912112 0 1.570796327 -1.047197549 -1.047197549</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_roller_11">
+        <pose relative_to="wheel_fr">0.0712912112 -0.04116 0 1.570796327 -0.5235987773 -0.5235987773</pose>
+        <geometry>
+          <capsule>
+            <radius>0.01421</radius>
+            <length>0.025479999923419542</length>
+          </capsule>
+        </geometry>
+        <material>
+          <ambient>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</ambient>
+          <diffuse>0.5299999713897705 0.5600000023841858 0.5799999833106995 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_0">
+        <pose relative_to="wheel_fr">0.0539 0 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_1">
+        <pose relative_to="wheel_fr">0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_2">
+        <pose relative_to="wheel_fr">-0.02695 0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_3">
+        <pose relative_to="wheel_fr">-0.0539 6.60084625e-18 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_4">
+        <pose relative_to="wheel_fr">-0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="wheel_fr_bolt_5">
+        <pose relative_to="wheel_fr">0.02695 -0.0466787693 0.0336 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.004</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="wheel_fr_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>wheel_fr</child>
+      <pose relative_to="wheel_fr">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.03</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <frame name="armor_front" attached_to="chassis">
+      <pose relative_to="chassis">0.255 0 0.012 0 -0 0</pose>
+    </frame>
+    <frame name="armor_left" attached_to="chassis">
+      <pose relative_to="chassis">1.56142467e-17 0.255 0.012 0 -0 1.57079633</pose>
+    </frame>
+    <frame name="armor_rear" attached_to="chassis">
+      <pose relative_to="chassis">-0.255 3.12284934e-17 0.012 0 -0 3.14159265</pose>
+    </frame>
+    <frame name="armor_right" attached_to="chassis">
+      <pose relative_to="chassis">1.56142467e-17 -0.255 0.012 0 0 -1.57079633</pose>
+    </frame>
+    <link name="upper_platform">
+      <pose relative_to="chassis">0 0 0.005 0 -0 0</pose>
+      <inertial>
+        <mass>4.0</mass>
+        <pose>-0.06 0 0.035 0 -0 0</pose>
+        <inertia>
+          <ixx>0.05</ixx>
+          <iyy>0.07</iyy>
+          <izz>0.09</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="big_yaw_bearing">
+        <pose relative_to="upper_platform">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.066</radius>
+            <length>0.05</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="big_yaw_bearing_collision">
+        <pose relative_to="upper_platform">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.066</radius>
+            <length>0.05</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="upper_deck">
+        <pose relative_to="upper_platform">-0.04 0 0.015 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.024</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="upper_deck_collision">
+        <pose relative_to="upper_platform">-0.04 0 0.015 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.024</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="deck_vent_-0.1">
+        <pose relative_to="upper_platform">-0.09 -0.1 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="deck_vent_-0.06">
+        <pose relative_to="upper_platform">-0.09 -0.06 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="deck_vent_-0.02">
+        <pose relative_to="upper_platform">-0.09 -0.02 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="deck_vent_0.02">
+        <pose relative_to="upper_platform">-0.09 0.02 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="deck_vent_0.06">
+        <pose relative_to="upper_platform">-0.09 0.06 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="deck_vent_0.1">
+        <pose relative_to="upper_platform">-0.09 0.1 0.053 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.19 0.008 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="fold_support">
+        <pose relative_to="upper_platform">0.08 0 0.039 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.06 0.11 0.064</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="fold_support_collision">
+        <pose relative_to="upper_platform">0.08 0 0.039 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.06 0.11 0.064</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+    <joint name="big_yaw" type="revolute">
+      <parent>chassis</parent>
+      <child>upper_platform</child>
+      <pose relative_to="upper_platform">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="mid360">
+      <pose relative_to="upper_platform">-0.08 0.06 0.04 0 -0 0</pose>
+      <inertial>
+        <mass>0.265</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>0.000172802083</ixx>
+          <iyy>0.000172802083</iyy>
+          <izz>0.000186604167</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="mid360_enclosure">
+        <pose relative_to="mid360">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.065 0.065 0.06</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="mid360_enclosure_collision">
+        <pose relative_to="mid360">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.065 0.065 0.06</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mid360_window">
+        <pose relative_to="mid360">0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0328</radius>
+            <length>0.022</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</ambient>
+          <diffuse>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="mid360_cap">
+        <pose relative_to="mid360">0 0 0.027 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.031</radius>
+            <length>0.012</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="mid360_fixed" type="fixed">
+      <parent>upper_platform</parent>
+      <child>mid360</child>
+      <pose relative_to="mid360">0 0 0 0 -0 0</pose>
+    </joint>
+    <link name="fold_carrier">
+      <pose relative_to="upper_platform">0.05 0 0.026 0 -0 0</pose>
+      <inertial>
+        <mass>1.2</mass>
+        <pose>0 0 0.09 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00424</ixx>
+          <iyy>0.0035316</iyy>
+          <izz>0.0012916</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="fold_motor">
+        <pose relative_to="fold_carrier">0 0 0 0 1.570796327 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.034</radius>
+            <length>0.054</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="fold_rail_-1">
+        <pose relative_to="fold_carrier">0 -0.035 0.09 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.036 0.016 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="fold_rail_-1_collision">
+        <pose relative_to="fold_carrier">0 -0.035 0.09 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.036 0.016 0.18</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="fold_rail_1">
+        <pose relative_to="fold_carrier">0 0.035 0.09 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.036 0.016 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="fold_rail_1_collision">
+        <pose relative_to="fold_carrier">0 0.035 0.09 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.036 0.016 0.18</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="small_yaw_stator">
+        <pose relative_to="fold_carrier">0 0 0.16 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.044</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="small_yaw_stator_collision">
+        <pose relative_to="fold_carrier">0 0 0.16 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.044</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+    <joint name="fold_roll" type="revolute">
+      <parent>upper_platform</parent>
+      <child>fold_carrier</child>
+      <pose relative_to="fold_carrier">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0.0</lower>
+          <upper>1.57079633</upper>
+          <effort>50</effort>
+          <velocity>1.5</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="small_yaw_link">
+      <pose relative_to="fold_carrier">0 0 0.18 0 -0 0</pose>
+      <inertial>
+        <mass>0.65</mass>
+        <pose>0 0 0.02 0 -0 0</pose>
+        <inertia>
+          <ixx>0.00112666667</ixx>
+          <iyy>0.000693333333</iyy>
+          <izz>0.00112666667</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="small_yaw_rotor">
+        <pose relative_to="small_yaw_link">0 0 0.007 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.043</radius>
+            <length>0.018</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="pitch_bracket_-1">
+        <pose relative_to="small_yaw_link">0 -0.04 0.0325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.032 0.018 0.065</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="pitch_bracket_-1_collision">
+        <pose relative_to="small_yaw_link">0 -0.04 0.0325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.032 0.018 0.065</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="pitch_bracket_1">
+        <pose relative_to="small_yaw_link">0 0.04 0.0325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.032 0.018 0.065</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="pitch_bracket_1_collision">
+        <pose relative_to="small_yaw_link">0 0.04 0.0325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.032 0.018 0.065</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+    <joint name="small_yaw" type="revolute">
+      <parent>fold_carrier</parent>
+      <child>small_yaw_link</child>
+      <pose relative_to="small_yaw_link">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.74532925</lower>
+          <upper>1.74532925</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="pitch_link">
+      <pose relative_to="small_yaw_link">0 0 0.065 0 -0 0</pose>
+      <inertial>
+        <mass>2.0</mass>
+        <pose>-0.01 0 0.025 0 -0 0</pose>
+        <inertia>
+          <ixx>0.008</ixx>
+          <iyy>0.016</iyy>
+          <izz>0.018</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="head_housing">
+        <pose relative_to="pitch_link">0.035 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.21 0.086 0.074</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</ambient>
+          <diffuse>0.054999999701976776 0.0689999982714653 0.09000000357627869 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="head_housing_collision">
+        <pose relative_to="pitch_link">0.035 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.21 0.086 0.074</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="hopper">
+        <pose relative_to="pitch_link">-0.055 0 0.087 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.12 0.09 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</ambient>
+          <diffuse>0.10999999940395355 0.14000000059604645 0.1899999976158142 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="hopper_collision">
+        <pose relative_to="pitch_link">-0.055 0 0.087 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.12 0.09 0.1</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="flywheel_cover_-1">
+        <pose relative_to="pitch_link">0.03 -0.05 0.008 -1.570796327 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.038</radius>
+            <length>0.014</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="flywheel_cover_1">
+        <pose relative_to="pitch_link">0.03 0.05 0.008 -1.570796327 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.038</radius>
+            <length>0.014</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</ambient>
+          <diffuse>0.1599999964237213 0.20000000298023224 0.25999999046325684 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <visual name="muzzle_housing">
+        <pose relative_to="pitch_link">0.165 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.068 0.052</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="muzzle_housing_collision">
+        <pose relative_to="pitch_link">0.165 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.068 0.052</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="muzzle_aperture">
+        <pose relative_to="pitch_link">0.19 0 0 0 1.570796327 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.017</radius>
+            <length>0.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</ambient>
+          <diffuse>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="pitch" type="revolute">
+      <parent>small_yaw_link</parent>
+      <child>pitch_link</child>
+      <pose relative_to="pitch_link">0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-0.34906585</lower>
+          <upper>0.523598776</upper>
+          <effort>15</effort>
+          <velocity>30</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="industrial_camera">
+      <pose relative_to="pitch_link">0.16 0 -0.065 0 -0 0</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>2.72666667e-05</ixx>
+          <iyy>2.57666667e-05</iyy>
+          <izz>3.37666667e-05</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="camera_case">
+        <pose relative_to="industrial_camera">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.044 0.046 0.034</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</ambient>
+          <diffuse>0.5199999809265137 0.5899999737739563 0.6499999761581421 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="camera_case_collision">
+        <pose relative_to="industrial_camera">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.044 0.046 0.034</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="camera_lens">
+        <pose relative_to="industrial_camera">0.026 0 0 0 1.570796327 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>0.018</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</ambient>
+          <diffuse>0.012000000104308128 0.02199999988079071 0.03099999949336052 1.0</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+    </link>
+    <joint name="industrial_camera_fixed" type="fixed">
+      <parent>pitch_link</parent>
+      <child>industrial_camera</child>
+      <pose relative_to="industrial_camera">0 0 0 0 -0 0</pose>
+    </joint>
+    <frame name="base_link" attached_to="chassis">
+      <pose relative_to="chassis">0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="lidar_link" attached_to="mid360">
+      <pose relative_to="mid360">0 0 0 0 0 0</pose>
+    </frame>
+    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>big_yaw</joint_name>
+      <topic>/model/hnu2027_sentry/joint/big_yaw/cmd_pos</topic>
+      <p_gain>120</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>8</d_gain>
+      <cmd_max>15</cmd_max>
+      <cmd_min>-15</cmd_min>
+    </plugin>
+    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>fold_roll</joint_name>
+      <topic>/model/hnu2027_sentry/joint/fold_roll/cmd_pos</topic>
+      <p_gain>2700</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>8</d_gain>
+      <cmd_max>50</cmd_max>
+      <cmd_min>-50</cmd_min>
+    </plugin>
+    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>small_yaw</joint_name>
+      <topic>/model/hnu2027_sentry/joint/small_yaw/cmd_pos</topic>
+      <p_gain>120</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>8</d_gain>
+      <cmd_max>15</cmd_max>
+      <cmd_min>-15</cmd_min>
+    </plugin>
+    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>pitch</joint_name>
+      <topic>/model/hnu2027_sentry/joint/pitch/cmd_pos</topic>
+      <p_gain>120</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>8</d_gain>
+      <cmd_max>15</cmd_max>
+      <cmd_min>-15</cmd_min>
+    </plugin>
+    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+      <topic>/model/hnu2027_sentry/joint_state</topic>
+    </plugin>
+  </model>
+</sdf>

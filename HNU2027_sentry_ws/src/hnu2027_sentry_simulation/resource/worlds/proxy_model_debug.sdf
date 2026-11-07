@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <world name="proxy_model_debug">
+    <gravity>0 0 -9.8</gravity>
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics" />
+    <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands" />
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster" />
+    <include>
+      <uri>model://hnu2027_sentry_proxy</uri>
+      <pose>0 0 0.01 0 0 0</pose>
+    </include>
+    <model name="ground">
+      <static>true</static>
+      <link name="ground_link">
+        <visual name="ground_visual">
+          <pose>0 0 -0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6 6 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.35 0.4 1</ambient>
+            <diffuse>0.3 0.35 0.4 1</diffuse>
+          </material>
+        </visual>
+        <collision name="ground_collision">
+          <pose>0 0 -0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6 6 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <light name="sun" type="directional">
+      <pose>0 0 5 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <direction>-0.4 -0.3 -1</direction>
+    </light>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.19 0.23 0.29 1</background>
+    </scene>
+  </world>
+</sdf>
