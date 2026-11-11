@@ -19,6 +19,7 @@ enum class TraversePhase
   kComplete,
   kFallback,
   kAbort,
+  kRestore,
 };
 
 std::string to_string(TraversePhase phase);
@@ -32,6 +33,7 @@ struct TraverseTimeouts
   double verify_s{2.0};
   double traverse_s{15.0};
   double unfold_s{5.0};
+  double observation_loss_s{1.0};
 
   bool valid() const;
 };
@@ -46,6 +48,10 @@ struct TraverseInput
   bool fold_fault{false};
   bool exited_tunnel{false};
   bool cancel_requested{false};
+  // False means unavailable measurements, distinct from an observed unsafe opening.
+  bool observation_available{true};
+  bool require_restore{false};
+  bool restore_completed{false};
 };
 
 struct TraverseCommand
@@ -73,6 +79,8 @@ private:
   void transition(TraversePhase next, double now_s);
   bool expired(double now_s, double timeout_s) const;
 
+  bool observation_missing_{false};
+  double observation_missing_at_s_{0.0};
   TraverseTimeouts timeouts_;
   TraversePhase phase_{TraversePhase::kNormal};
   double entered_at_s_{0.0};

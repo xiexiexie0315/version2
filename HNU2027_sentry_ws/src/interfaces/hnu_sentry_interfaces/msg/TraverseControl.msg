@@ -13,4 +13,5 @@ uint8 UNFOLD=8
 uint8 COMPLETE=9
 uint8 FALLBACK=10
 uint8 ABORT=11
+uint8 RESTORE=12
 uint8 phase

@@ -40,7 +40,7 @@ CoordinatorOutput NavigationCoordinator::update(const CoordinatorInput& in, doub
   if (!in.request_received || !fresh(in.request_stamp_s, now, config_.request_timeout_s))
     return stop("control_request_timeout");
   const auto p = in.phase;
-  if (static_cast<unsigned>(p) > static_cast<unsigned>(Phase::kAbort))
+  if (static_cast<unsigned>(p) > static_cast<unsigned>(Phase::kRestore))
     return stop("invalid_phase");
   const bool normal = p == Phase::kNormal || p == Phase::kApproach;
   if (!normal && p != Phase::kComplete) {
@@ -95,6 +95,15 @@ CoordinatorOutput NavigationCoordinator::update(const CoordinatorInput& in, doub
       case Phase::kTraverse:
       case Phase::kExit:
         if (!in.folded) return stop("fold_not_verified");
+        break;
+      case Phase::kRestore:
+        out.gimbal_mode = GimbalMode::kCenter;
+        if (!in.unfolded || !in.gimbal_ready)
+          return stop("waiting_unfolded_centered_before_restore");
+        if (!in.centered) {
+          out.command_valid=true;
+          return stop("waiting_centered_before_restore");
+        }
         break;
       case Phase::kUnfold:
         mux_input.traverse.request_stop = true;

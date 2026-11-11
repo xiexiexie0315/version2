@@ -155,4 +155,17 @@ TEST(NavigationCoordinator, InvalidLateralVelocityStops) {
   in.nav2.linear_y_mps = std::numeric_limits<double>::quiet_NaN();
   EXPECT_FALSE(c.update(in, 1.1).motion_allowed);
 }
+TEST(NavigationCoordinator, RestoreUsesDirectControlAndRequiresUnfolding)
+{
+  NavigationCoordinator c;auto in=ready();
+  in.phase=Phase::kRestore;in.actual_chassis_mode=ChassisMode::kNavDirect;
+  in.unfolded=false;
+  EXPECT_FALSE(c.update(in,1.1).motion_allowed);
+  in.unfolded=true;
+  auto out=c.update(in,1.1);
+  EXPECT_TRUE(out.motion_allowed);
+  EXPECT_EQ(out.chassis_mode,ChassisMode::kNavDirect);
+  EXPECT_EQ(out.gimbal_mode,GimbalMode::kCenter);
+  EXPECT_FALSE(out.allow_fire);
+}
 }  // namespace

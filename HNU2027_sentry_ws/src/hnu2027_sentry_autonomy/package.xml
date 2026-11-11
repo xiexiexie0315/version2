@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package format="3"><name>hnu2027_sentry_autonomy</name><version>0.1.0</version>
+<description>Sensor-driven Nav2 and HNU tunnel mission integration.</description>
+<maintainer email="sentry@example.invalid">HNU sentry team</maintainer><license>Proprietary</license>
+<buildtool_depend>ament_cmake</buildtool_depend><buildtool_depend>ament_cmake_python</buildtool_depend>
+<depend>rclcpp</depend>
+<depend>rclcpp_action</depend>
+<depend>nav2_msgs</depend>
+<depend>lifecycle_msgs</depend>
+<depend>geometry_msgs</depend>
+<depend>std_msgs</depend>
+<depend>hnu_sentry_interfaces</depend>
+<depend>hnu_tunnel_core</depend>
+<depend>tf2</depend>
+<depend>tf2_ros</depend>
+<exec_depend>rclpy</exec_depend>
+<depend>sensor_msgs</depend>
+<depend>nav_msgs</depend>
+<exec_depend>tf2_ros_py</exec_depend>
+<exec_depend>tf2_sensor_msgs</exec_depend>
+<exec_depend>sensor_msgs_py</exec_depend>
+<exec_depend>hnu_gazebo_adapter</exec_depend>
+<exec_depend>hnu_tunnel_perception</exec_depend>
+<exec_depend>hnu2027_sentry_simulation</exec_depend>
+<exec_depend>hnu_tunnel_bringup</exec_depend>
+<exec_depend>pb_omni_pid_pursuit_controller</exec_depend>
+<exec_depend>nav2_amcl</exec_depend>
+<exec_depend>nav2_map_server</exec_depend>
+<exec_depend>nav2_planner</exec_depend>
+<exec_depend>nav2_controller</exec_depend>
+<exec_depend>nav2_bt_navigator</exec_depend>
+<exec_depend>nav2_lifecycle_manager</exec_depend>
+<exec_depend>nav2_navfn_planner</exec_depend>
+<exec_depend>ros_gz_bridge</exec_depend>
+<exec_depend>rviz2</exec_depend>
+<exec_depend>launch_ros</exec_depend>
+<exec_depend>ament_index_python</exec_depend>
+<exec_depend>python3-numpy</exec_depend>
+<exec_depend>python3-yaml</exec_depend>
+
+<test_depend>ament_cmake_pytest</test_depend>
+<export><build_type>ament_cmake</build_type></export></package>

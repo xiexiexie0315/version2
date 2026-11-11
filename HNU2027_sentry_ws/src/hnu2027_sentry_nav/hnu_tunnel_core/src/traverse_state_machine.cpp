@@ -26,6 +26,7 @@ std::string to_string(TraversePhase phase)
     case TraversePhase::kComplete: return "complete";
     case TraversePhase::kFallback: return "fallback";
     case TraversePhase::kAbort: return "abort";
+    case TraversePhase::kRestore: return "restore";
   }
   return "unknown";
 }
@@ -35,7 +36,7 @@ bool TraverseTimeouts::valid() const
   return finite_positive(approach_s) && finite_positive(detect_s) &&
          finite_positive(align_s) && finite_positive(fold_s) &&
          finite_positive(verify_s) && finite_positive(traverse_s) &&
-         finite_positive(unfold_s);
+         finite_positive(unfold_s) && finite_positive(observation_loss_s);
 }
 
 TraverseStateMachine::TraverseStateMachine(TraverseTimeouts timeouts)
@@ -96,7 +97,11 @@ TraverseCommand TraverseStateMachine::step(const TraverseInput & input, double n
       }
       return command("awaiting_safe_observation");
     case TraversePhase::kAlign:
-      if (input.aligned) {
+      if (input.aligned && input.observation_available && !input.observation_safe) {
+        transition(TraversePhase::kAbort, now_s);
+        return command("unsafe_before_fold");
+      }
+      if (input.aligned && input.observation_available && input.observation_safe) {
         transition(TraversePhase::kFold, now_s);
         return command("aligned");
       }
@@ -134,6 +139,19 @@ TraverseCommand TraverseStateMachine::step(const TraverseInput & input, double n
       }
       return command("awaiting_post_fold_observation");
     case TraversePhase::kTraverse:
+      if (!input.observation_available) {
+        if (!observation_missing_) {
+          observation_missing_=true;observation_missing_at_s_=now_s;
+        }
+        if (now_s-observation_missing_at_s_>timeouts_.observation_loss_s) {
+          transition(TraversePhase::kAbort,now_s);
+          return command("observation_unavailable_timeout");
+        }
+        auto stopped=command("waiting_for_observation");
+        stopped.request_stop=true;stopped.allow_traverse=false;
+        return stopped;
+      }
+      observation_missing_=false;
       if (!input.observation_safe) {
         transition(TraversePhase::kAbort, now_s);
         return command("unsafe_during_traverse");
@@ -156,7 +174,7 @@ TraverseCommand TraverseStateMachine::step(const TraverseInput & input, double n
         return command("unfold_fault");
       }
       if (!input.fold_target && input.fold_completed) {
-        transition(TraversePhase::kComplete, now_s);
+        transition(input.require_restore ? TraversePhase::kRestore : TraversePhase::kComplete, now_s);
         return command("unfold_complete");
       }
       if (expired(now_s, timeouts_.unfold_s)) {
@@ -164,6 +182,14 @@ TraverseCommand TraverseStateMachine::step(const TraverseInput & input, double n
         return command("unfold_timeout");
       }
       return command("awaiting_unfold_completion");
+    case TraversePhase::kRestore:
+      if(input.restore_completed){
+        transition(TraversePhase::kComplete,now_s);return command("restore_complete");
+      }
+      if(expired(now_s,timeouts_.align_s)){
+        transition(TraversePhase::kAbort,now_s);return command("restore_timeout");
+      }
+      return command("restoring_normal_clearance");
     case TraversePhase::kComplete:
     case TraversePhase::kFallback:
     case TraversePhase::kAbort:
@@ -182,6 +208,7 @@ TraverseCommand TraverseStateMachine::command(const std::string & reason) const
                            phase_ == TraversePhase::kTraverse ||
                            phase_ == TraversePhase::kExit ||
                            phase_ == TraversePhase::kUnfold ||
+                           phase_ == TraversePhase::kRestore ||
                            phase_ == TraversePhase::kAbort;
   const bool stop = phase_ == TraversePhase::kDetect || phase_ == TraversePhase::kFold ||
                     phase_ == TraversePhase::kVerify || phase_ == TraversePhase::kUnfold ||
@@ -192,6 +219,7 @@ TraverseCommand TraverseStateMachine::command(const std::string & reason) const
 
 void TraverseStateMachine::transition(TraversePhase next, double now_s)
 {
+  observation_missing_=false;
   phase_ = next;
   entered_at_s_ = now_s;
 }

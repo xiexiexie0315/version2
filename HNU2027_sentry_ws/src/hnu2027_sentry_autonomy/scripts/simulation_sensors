@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+from hnu2027_sentry_autonomy.sensors import main
+if __name__=="__main__":main()

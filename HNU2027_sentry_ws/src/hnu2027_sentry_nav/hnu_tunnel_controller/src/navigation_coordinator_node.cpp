@@ -59,7 +59,7 @@ class NavigationCoordinatorNode : public rclcpp::Node {
     request_sub_ = create_subscription<Request>(
       declare_parameter<std::string>("request_topic", "/tunnel/control_request"), qos,
       [this,config](Request::ConstSharedPtr msg) {
-        input_.request_received = msg->phase <= Request::ABORT;
+        input_.request_received = msg->phase <= Request::RESTORE;
         input_.request_stamp_s = stamped_time(msg->header, config.request_timeout_s, false);
         input_.phase = static_cast<hnu_tunnel_core::TraversePhase>(msg->phase);
         input_.request_id = msg->request_id;

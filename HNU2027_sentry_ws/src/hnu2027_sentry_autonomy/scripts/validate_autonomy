@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""Run isolated real Gazebo/Nav2 missions; never sends intermediate phases."""
+import argparse
+import json
+import os
+from pathlib import Path
+import signal
+import subprocess
+import tempfile
+import time
+from ament_index_python.packages import get_package_prefix
+
+def descendants(pid):
+    rows={}
+    for path in Path("/proc").iterdir():
+        if not path.name.isdigit():continue
+        try:
+            data=(path/"stat").read_text()
+            parent=int(data[data.rfind(")")+2:].split()[1])
+            rows[int(path.name)]=(parent,(path/"cmdline").read_bytes())
+        except (OSError,ValueError,IndexError):pass
+    selected={pid};changed=True
+    while changed:
+        before=len(selected)
+        selected.update(p for p,(parent,_) in rows.items() if parent in selected)
+        changed=len(selected)!=before
+    return {p:rows[p][1] for p in selected if p in rows}
+
+def cleanup(process):
+    owned=descendants(process.pid)
+    if process.poll() is None:
+        os.killpg(process.pid,signal.SIGINT)
+        try:process.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            os.killpg(process.pid,signal.SIGTERM)
+            try:process.wait(timeout=3)
+            except subprocess.TimeoutExpired:os.killpg(process.pid,signal.SIGKILL)
+    for pid,command in owned.items():
+        try:
+            if Path("/proc",str(pid),"cmdline").read_bytes()==command:
+                os.kill(pid,signal.SIGTERM)
+        except ProcessLookupError:pass
+        except FileNotFoundError:pass
+
+def measured_snapshot(domain):
+    import math
+    import rclpy
+    from rclpy.context import Context
+    from rclpy.executors import SingleThreadedExecutor
+    from rclpy.node import Node
+    from rclpy.qos import qos_profile_sensor_data
+    from nav_msgs.msg import Odometry
+    from sensor_msgs.msg import JointState
+    os.environ["ROS_DOMAIN_ID"]=str(domain)
+    os.environ["ROS_LOCALHOST_ONLY"]="1"
+    context=Context();rclpy.init(context=context)
+    node=Node("validation_measurements",context=context)
+    executor=SingleThreadedExecutor(context=context);executor.add_node(node)
+    measured={}
+    def odom(msg):
+        v=msg.twist.twist
+        measured["world_xy"]=[msg.pose.pose.position.x,msg.pose.pose.position.y]
+        measured["actual_velocity"]=[v.linear.x,v.linear.y,v.angular.z]
+    def joints(msg):
+        values=dict(zip(msg.name,msg.position))
+        if "fold_roll" in values:measured["fold_position"]=values["fold_roll"]
+    node.create_subscription(Odometry,"/model/hnu2027_sentry/odometry",odom,qos_profile_sensor_data)
+    node.create_subscription(JointState,"/model/hnu2027_sentry/joint_state",joints,qos_profile_sensor_data)
+    deadline=time.monotonic()+6
+    try:
+        while time.monotonic()<deadline and len(measured)<3:
+            executor.spin_once(timeout_sec=.05)
+        assert len(measured)==3,"No fresh raw Gazebo measurements"
+        return measured
+    finally:
+        executor.shutdown();node.destroy_node();rclpy.shutdown(context=context)
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--gui",action="store_true")
+    parser.add_argument("--output",default=None)
+    args=parser.parse_args()
+    output=Path(args.output or tempfile.mkdtemp(prefix="hnu_autonomy_validation_"))
+    output.mkdir(parents=True,exist_ok=True)
+    print("Reports: "+str(output),flush=True)
+    domain=80+os.getpid()%20
+    goal_exe=Path(get_package_prefix("hnu2027_sentry_autonomy"))/"lib/hnu2027_sentry_autonomy/submit_tunnel_goal"
+    results=[]
+    try:
+        for blocked in (False,True):
+            name="blocked" if blocked else "positive"
+            print("Starting "+name+" mission in ROS domain "+str(domain),flush=True)
+            runtime=output/(name+"_runtime.log");goal_log=output/(name+"_goal.log")
+            report_path=output/(name+"_report.json")
+            env=os.environ.copy()
+            env["ROS_LOCALHOST_ONLY"]="1"
+            with runtime.open("w") as log:
+                launch=subprocess.Popen(["ros2","launch","hnu2027_sentry_autonomy",
+                    "autonomous_tunnel.launch.py","gui:="+str(args.gui).lower(),
+                    "simulation_domain_id:="+str(domain),
+                    "ign_partition:=hnu_validation_"+str(os.getpid())+"_"+name,
+                    "block_tunnel:="+str(blocked).lower()],env=env,stdout=log,
+                    stderr=subprocess.STDOUT,start_new_session=True)
+                try:
+                    with goal_log.open("w") as log_goal:
+                        goal=subprocess.run([str(goal_exe),"--domain-id",str(domain),
+                            "--report",str(report_path)],env=env,stdout=log_goal,
+                            stderr=subprocess.STDOUT,timeout=210)
+                    report=json.loads(report_path.read_text())
+                    history=report["history"];phases={v["phase"] for v in history}
+                    measured=measured_snapshot(domain)
+                    assert abs(measured["fold_position"])<.03,measured
+                    assert max(abs(v) for v in measured["actual_velocity"])<.04,measured
+                    if blocked:
+                        assert goal.returncode!=0 and not report["success"],report
+                        assert "detect" in phases and "traverse" not in phases,history
+                        assert history[-1]["phase"]=="abort" and history[-1]["stopped"],history[-1]
+                        assert not history[-1]["folded"] and history[-1]["unfolded"],history[-1]
+                        assert history[-1]["x"]< -2.65-.264-.08,history[-1]
+                        assert measured["world_xy"][0]<-2.65-.264-.08,measured
+                        result=dict(case=name,passed=True,reason=report["error"],
+                                    final=history[-1],measured=measured)
+                    else:
+                        assert goal.returncode==0 and report["success"],report
+                        required={"approach","detect","align","fold","verify","traverse",
+                                  "exit","unfold","restore","complete"}
+                        assert required<=phases,(required-phases,history)
+                        final=history[-1]
+                        assert final["stopped"] and final["unfolded"] and not final["folded"],final
+                        assert any(v["phase"]=="complete" and v["controller_mode"]==1 for v in history),history
+                        x,y=measured["world_xy"]
+                        error=((x+1.2)**2+(y-3.5)**2)**.5
+                        assert error<.15,(error,measured)
+                        assert any(abs(v["actual_wz"])>.25 and v["phase"]=="complete" for v in history),history
+                        result=dict(case=name,passed=True,final=final,measured=measured,
+                                    world_goal_error_m=error)
+                    results.append(result)
+                    print(json.dumps(result),flush=True)
+                finally:
+                    cleanup(launch)
+            domain+=1
+    except Exception as error:
+        import traceback
+        traceback.print_exc()
+        results.append(dict(passed=False,error=str(error)))
+    summary=dict(passed=len(results)==2 and all(v["passed"] for v in results),
+                 output=str(output),cases=results)
+    (output/"summary.json").write_text(json.dumps(summary,indent=2))
+    print(json.dumps(summary),flush=True)
+    if not summary["passed"]:raise SystemExit(1)
+
+if __name__=="__main__":main()

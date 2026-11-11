@@ -28,6 +28,8 @@ struct TunnelPrior
 
 struct DetectorConfig
 {
+  // Explicit opt-in for roof-only openings. Width is measured coverage, never prior width.
+  bool allow_roof_edge_width{false};
   std::size_t minimum_samples{40};
   std::size_t minimum_roof_points{12};
   std::size_t minimum_wall_points{6};
@@ -55,6 +57,7 @@ struct GeometryObservation
 GeometryObservation detect_tunnel_geometry(
   const std::vector<Point3> & map_points,
   const TunnelPrior & prior,
-  const DetectorConfig & config);
+  const DetectorConfig & config,
+  const std::vector<Point3> * current_obstacle_points = nullptr);
 
 }  // namespace hnu_tunnel_perception

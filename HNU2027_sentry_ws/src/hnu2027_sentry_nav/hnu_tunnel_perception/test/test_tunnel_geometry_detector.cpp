@@ -54,5 +54,59 @@ TEST(TunnelGeometryDetector, DetectsInteriorObstacle)
   EXPECT_FALSE(result.obstacle_free);
   EXPECT_EQ(result.reason, "tunnel_obstacle_detected");
 }
+TEST(TunnelGeometryDetector, RoofOnlyOpeningRequiresExplicitModeAndMeasuredCoverage)
+{
+  std::vector<Point3> points;
+  for (int x=-2;x<=2;++x)
+    for (int y=-20;y<=20;++y) points.push_back({x*.05,y*.02,.35});
+  EXPECT_FALSE(detect_tunnel_geometry(points,prior(),{}).detected);
+  DetectorConfig config;config.allow_roof_edge_width=true;
+  const auto result=detect_tunnel_geometry(points,prior(),config);
+  ASSERT_TRUE(result.geometry_valid);
+  EXPECT_NEAR(result.width_m,.8,.01);
+  EXPECT_NEAR(result.clearance_m,.25,.01);
+  EXPECT_TRUE(result.obstacle_free);
+  points.push_back({0,0,.2});
+  EXPECT_FALSE(detect_tunnel_geometry(points,prior(),config).obstacle_free);
+}
+
+TEST(TunnelGeometryDetector, PartialRoofDoesNotInventPriorWidth)
+{
+  std::vector<Point3> points;
+  for(int x=-3;x<=3;++x)
+    for(int y=-5;y<=5;++y) points.push_back({x*.04,y*.02,.35});
+  DetectorConfig config;config.allow_roof_edge_width=true;
+  const auto result=detect_tunnel_geometry(points,prior(),config);
+  EXPECT_TRUE(result.detected);
+  EXPECT_NEAR(result.width_m,.2,.01);
+}
+TEST(TunnelGeometryDetector, FusesMeasuredRoofEdgesAcrossRegistrationBins)
+{
+  std::vector<Point3> points;
+  for(int x=-2;x<=2;++x)
+    for(int y=-20;y<=20;++y) points.push_back({x*.04,y*.02,.347});
+  for(int i=0;i<500;++i) points.push_back({0,(i%11-5)*.02,.355});
+  DetectorConfig config;config.allow_roof_edge_width=true;
+  config.roof_exclusion_m=.012;
+  auto result=detect_tunnel_geometry(points,prior(),config);
+  ASSERT_TRUE(result.geometry_valid);
+  EXPECT_NEAR(result.width_m,.8,.01);
+  EXPECT_TRUE(result.obstacle_free);
+  points.push_back({0,0,.23});
+  EXPECT_FALSE(detect_tunnel_geometry(points,prior(),config).obstacle_free);
+}
+TEST(TunnelGeometryDetector, FreshOccupancyIsIndependentFromHistoricalGeometry)
+{
+  auto current=valid_tunnel_points();
+  auto history=current;
+  history.push_back({0,0,.23});
+  DetectorConfig config;
+  EXPECT_FALSE(detect_tunnel_geometry(history,prior(),config).obstacle_free);
+  EXPECT_TRUE(detect_tunnel_geometry(history,prior(),config,&current).obstacle_free);
+  current.push_back({0,0,.24});
+  EXPECT_FALSE(detect_tunnel_geometry(history,prior(),config,&current).obstacle_free);
+  current.clear();
+  EXPECT_FALSE(detect_tunnel_geometry(history,prior(),config,&current).geometry_valid);
+}
 }  // namespace
 }  // namespace hnu_tunnel_perception

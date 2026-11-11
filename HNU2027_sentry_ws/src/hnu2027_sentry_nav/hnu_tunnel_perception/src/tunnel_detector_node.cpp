@@ -1,9 +1,11 @@
 #include <chrono>
 #include <cmath>
-#include <deque>
+#include <map>
+#include <tuple>
 #include <functional>
 #include <memory>
 #include <string>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 
@@ -37,6 +39,7 @@ public:
     prior_.expected_width_m = declare_parameter<double>("expected_width_m", 0.80);
     prior_.roi_length_m = declare_parameter<double>("roi_length_m", 1.4);
     prior_.roi_width_m = declare_parameter<double>("roi_width_m", 1.2);
+    config_.allow_roof_edge_width = declare_parameter<bool>("allow_roof_edge_width", false);
     config_.minimum_samples = static_cast<std::size_t>(declare_parameter<int>("minimum_samples", 40));
     config_.minimum_roof_points = static_cast<std::size_t>(declare_parameter<int>("minimum_roof_points", 12));
     config_.minimum_wall_points = static_cast<std::size_t>(declare_parameter<int>("minimum_wall_points", 6));
@@ -49,7 +52,14 @@ public:
     const auto output_topic = declare_parameter<std::string>("observation_topic", "tunnel/observation");
     accumulation_seconds_ = declare_parameter<double>("accumulation_seconds", 1.0);
     max_input_age_seconds_ = declare_parameter<double>("max_input_age_seconds", 0.5);
+    if(!std::isfinite(accumulation_seconds_) || accumulation_seconds_<=0)
+      throw std::invalid_argument("accumulation_seconds must be positive");
 
+    voxel_resolution_=declare_parameter<double>("voxel_resolution_m",0.01);
+    if(!std::isfinite(voxel_resolution_) || voxel_resolution_<0.005 || voxel_resolution_>0.05)
+      throw std::invalid_argument("voxel_resolution_m outside [0.005,0.05]");
+    if(!std::isfinite(accumulation_seconds_) || accumulation_seconds_<=0)
+      throw std::invalid_argument("accumulation_seconds must be positive");
     observation_pub_ = create_publisher<hnu_sentry_interfaces::msg::TunnelObservation>(output_topic, 10);
     cloud_sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
       input_topic, rclcpp::SensorDataQoS(),
@@ -57,12 +67,17 @@ public:
   }
 
 private:
-  struct CloudSample { rclcpp::Time stamp; std::vector<Point3> points; };
+  struct CloudVoxel { rclcpp::Time stamp; Point3 point; };
 
   void on_cloud(const sensor_msgs::msg::PointCloud2::SharedPtr message)
   {
     const rclcpp::Time stamp(message->header.stamp);
     const auto now = this->now();
+    if(stamp.nanoseconds()<=last_cloud_ns_){
+      if(stamp.nanoseconds()<last_cloud_ns_){voxels_.clear();last_cloud_ns_=stamp.nanoseconds();}
+      publish_failure(message->header,"non_monotonic_cloud_stamp");return;
+    }
+    last_cloud_ns_=stamp.nanoseconds();
     if (!std::isfinite(max_input_age_seconds_) || max_input_age_seconds_ <= 0.0 ||
         (now.nanoseconds() > 0 && now - stamp > rclcpp::Duration::from_seconds(max_input_age_seconds_))) {
       publish_failure(message->header, "stale_input");
@@ -83,19 +98,29 @@ private:
     points.reserve(pcl_cloud.size());
     for (const auto & point : pcl_cloud.points) {
       if (std::isfinite(point.x) && std::isfinite(point.y) && std::isfinite(point.z)) {
-        points.push_back({point.x, point.y, point.z});
+        // Store only the tunnel ROI before temporal fusion; do not retain entire scans.
+        const double dx=point.x-prior_.center_x_m, dy=point.y-prior_.center_y_m;
+        const double along=std::cos(prior_.axis_yaw_rad)*dx+std::sin(prior_.axis_yaw_rad)*dy;
+        const double across=-std::sin(prior_.axis_yaw_rad)*dx+std::cos(prior_.axis_yaw_rad)*dy;
+        if (std::abs(along)<=prior_.roi_length_m/2 && std::abs(across)<=prior_.roi_width_m/2)
+          points.push_back({point.x, point.y, point.z});
       }
     }
-    samples_.push_back({stamp, std::move(points)});
-    const auto earliest = stamp - rclcpp::Duration::from_seconds(accumulation_seconds_);
-    while (!samples_.empty() && samples_.front().stamp < earliest) {
-      samples_.pop_front();
+    for(const auto & point:points){
+      const auto key=std::make_tuple(static_cast<int>(std::floor(point.x/voxel_resolution_)),
+        static_cast<int>(std::floor(point.y/voxel_resolution_)),
+        static_cast<int>(std::floor(point.z/voxel_resolution_)));
+      voxels_.insert_or_assign(key,CloudVoxel{stamp,point});
     }
+    const auto earliest=stamp-rclcpp::Duration::from_seconds(accumulation_seconds_);
     std::vector<Point3> accumulated;
-    for (const auto & sample : samples_) {
-      accumulated.insert(accumulated.end(), sample.points.begin(), sample.points.end());
+    accumulated.reserve(voxels_.size());
+    for(auto it=voxels_.begin();it!=voxels_.end();){
+      if(it->second.stamp<earliest)it=voxels_.erase(it);
+      else{accumulated.push_back(it->second.point);++it;}
     }
-    publish_observation(message->header, detect_tunnel_geometry(accumulated, prior_, config_));
+    publish_observation(message->header,
+      detect_tunnel_geometry(accumulated,prior_,config_,&points));
   }
 
   void publish_failure(const std_msgs::msg::Header & header, const std::string & reason)
@@ -136,7 +161,9 @@ private:
   double max_input_age_seconds_{0.5};
   tf2_ros::Buffer tf_buffer_;
   tf2_ros::TransformListener tf_listener_;
-  std::deque<CloudSample> samples_;
+  std::map<std::tuple<int,int,int>,CloudVoxel> voxels_;
+  int64_t last_cloud_ns_{-1};
+  double voxel_resolution_{0.01};
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr cloud_sub_;
   rclcpp::Publisher<hnu_sentry_interfaces::msg::TunnelObservation>::SharedPtr observation_pub_;
 };
